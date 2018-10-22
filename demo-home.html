@@ -47,7 +47,20 @@
         </button>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <a href="#" id="search-icon-menu" class="search-icon"></a>
+        <div class="search-bar-wrapper">
+          <div id="search-bar">
+            <form action="" method="get">
+                <label for="search" class="sr-only">Search</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="s" placeholder="Search..." />
+                  <span class="input-group-btn">
+                    <button class="search-icon"></button>
+                  </span>
+                </div>
+            </form>
+          </div>
+        </div>
+        <a href="#" id="search-icon-menu" class="search-icon hidden-xs"></a>
         <a href="#" id="my-trip-icon" data-count="0">My Trip</a>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -66,70 +79,58 @@
         </ul>
       </div>
     </div>
-    <div class="search-bar-wrapper">
-      <div id="search-bar">
-        <form action="" method="get">
-            <label for="search" class="sr-only">Search</label>
-            <div class="input-group">
-              <input type="text" class="form-control" name="s" placeholder="Search..." />
-              <span class="input-group-btn">
-                <button class="search-icon"></button>
-              </span>
-            </div>
-        </form>
-      </div>
-    </div>
   </nav>
 
   <section id="quick-links">
     <div class="container">
-      <header class="section-header">
-        <h2>King George County</h2>
-        <p>A Rich Heritage of Land and People!</p>
-      </header>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/sunset-kyaking.jpg" alt="" />
-            <div class="caption">
-              <h3>Outdoors</h3>
-            </div>
-            <div class="quick-link-overlay"></div>
+        <header class="section-header">
+          <h2>King George County</h2>
+          <p>A Rich Heritage of Land and People!</p>
+        </header>
+        <div class="row">
+          <div class="col-sm-3">
+            <a href="#" class="quick-link" style="background-image:url(images/sunset-kyaking.jpg);">
+              <div class="caption">
+                <h3>Outdoors</h3>
+              </div>
+              <div class="quick-link-overlay"></div>
+            </a>
+          </div>
+          <div class="col-sm-3">
+            <a href="#" class="quick-link" style="background-image:url(images/crowning-miss.jpg);">
+              <div class="caption">
+                <h3>Events</h3>
+              </div>
+              <div class="quick-link-overlay"></div>
+            </a>
+          </div>
+          <div class="col-sm-3">
+            <a href="#" class="quick-link" style="background-image:url(images/serving-food.jpg);">
+              <div class="caption">
+                <h3>Good Eats</h3>
+              </div>
+              <div class="quick-link-overlay"></div>
+            </a>
+          </div>
+          <div class="col-sm-3">
+            <a href="#" class="quick-link" style="background-image:url(images/small-house.jpg);">
+              <div class="caption">
+                <h3>Lodging</h3>
+              </div>
+              <div class="quick-link-overlay"></div>
+            </a>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/crowning-miss.jpg" alt="" />
-            <div class="caption">
-              <h3>Events</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/serving-food.jpg" alt="" />
-            <div class="caption">
-              <h3>Good Eats</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/small-house.jpg" alt="" />
-            <div class="caption">
-              <h3>Lodging</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p>Explore the natural beauty of this historic county. Enjoy a variety of water sports including kayaking, canoeing, jet and water skiing, paddle boarding, boating, fishing, crabbing or just sunbathing on the historic Rappahannock and Potomac rivers. Watch Eagles soar at Caledon, hike, jog ro cycle on the 15 mile Heritage Railro</p>
-      <h2>See How Others View King George</h2>
+      <article>
+        <p>Explore the natural beauty of this historic county. Enjoy a variety of water sports including kayaking, canoeing, jet and water skiing, paddle boarding, boating, fishing, crabbing or just sunbathing on the historic Rappahannock and Potomac rivers. Watch Eagles soar at Caledon, hike, jog or cycle on the 15 mile Heritage Railroad.</p>
+      </article>
     </div>
   </section>
 
   <section id="instagram-feed">
+    <h2>See How Others View King George</h2>
     <div class="container">
-      <h2>@KingGeorgeVA</h2>
+      <h2 class="instagram-acct-name">@KingGeorgeVA</h2>
       <p>Share your experience with #visitkgva</p>
       <a href="#" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
@@ -186,80 +187,115 @@
       <h2>Explore our area</h2>
       <p>We have many points of interest</p>
     </header>
-    <div class="row">
-      <div class="col-sm-5 col-md-4">
-        <nav id="poi-nav">
-          <ul class="list-unstyled">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Places to eat<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Taco Bell</a></li>
-                <li><a href="#">Wendy's</a></li>
-                <li><a href="#">McDonald's</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Top Attractions<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Colonial Beach</a></li>
-                <li><a href="#">Caledon State Park</a></li>
-                <li><a href="#">Barnesfield Park</a></li>
-                <li><a href="#">North Dahlgren Heritage Museum</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Lodging<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Parks<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Activities<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Outdoors<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Shopping<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Historic Churches<i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Motel 6</a></li>
-                <li><a href="#">Holiday Inn</a></li>
-                <li><a href="#">Hilton</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-sm-7 col-md-8" style="background-image:url(images/map-placeholder.jpg); background-position:center center;">
-        
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-5 col-md-4">
+          <nav id="poi-nav">
+            <ul class="list-unstyled">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Places to eat<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Taco Bell</a></li>
+                  <li><a href="#">Wendy's</a></li>
+                  <li><a href="#">McDonald's</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Top Attractions<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Colonial Beach</a></li>
+                  <li><a href="#">Caledon State Park</a></li>
+                  <li><a href="#">Barnesfield Park</a></li>
+                  <li><a href="#">North Dahlgren Heritage Museum</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lodging<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parks<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outdoors<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shopping<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historic Churches<i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                  <li><a href="#">Motel 6</a></li>
+                  <li><a href="#">Holiday Inn</a></li>
+                  <li><a href="#">Hilton</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-sm-7 col-md-8">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100237.26363662547!2d-77.17266464691693!3d38.26988362304721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7200e6c4ada37%3A0x515f5c89e7162bcd!2sKing+George%2C+VA+22485!5e0!3m2!1sen!2sus!4v1540234061990" width="100%" height="660px" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -272,40 +308,36 @@
       </header>
       <div class="row">
         <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/sunset-kyaking.jpg" alt="" />
+          <a href="#" class="quick-link" style="background-image:url(images/sunset-kyaking.jpg);">
             <div class="caption">
               <h3>Outdoors</h3>
             </div>
             <div class="quick-link-overlay"></div>
-          </div>
+          </a>
         </div>
         <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/sunset-kyaking.jpg" alt="" />
+          <a href="#" class="quick-link" style="background-image:url(images/sunset-kyaking.jpg);">
             <div class="caption">
               <h3>Outdoors</h3>
             </div>
             <div class="quick-link-overlay"></div>
-          </div>
+          </a>
         </div>
         <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/sunset-kyaking.jpg" alt="" />
+          <a href="#" class="quick-link" style="background-image:url(images/sunset-kyaking.jpg);">
             <div class="caption">
               <h3>Outdoors</h3>
             </div>
             <div class="quick-link-overlay"></div>
-          </div>
+          </a>
         </div>
         <div class="col-sm-3">
-          <div class="quick-link">
-            <img src="images/sunset-kyaking.jpg" alt="" />
+          <a href="#" class="quick-link" style="background-image:url(images/sunset-kyaking.jpg);">
             <div class="caption">
               <h3>Outdoors</h3>
             </div>
             <div class="quick-link-overlay"></div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -393,14 +425,16 @@
             <a href="#" class="twitter text-hide" target="_blank">Twitter<i class="fab fa-twitter"></i></a>
             <a href="#" class="facebook text-hide" target="_blank">Facebook<i class="fab fa-facebook"></i></a>
           </div>
-          <p>King George County Department of Economic Development & Tourism</p>
-          <p>10459 Courthouse Drive, Suite 200<br />King George, VA 22485<br />540-775-9181</p>
+          <div class="contact-info">
+            <p>King George County Department of Economic Development & Tourism</p>
+            <p>10459 Courthouse Drive, Suite 200<br />King George, VA 22485<br />540-775-9181</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="copyright">
       <div class="container">
-        <p>&copy; 2018 King George Economic Development and Tourism | <a href="#">Privacy Policy</a> | <a href="#">List your business</a><br />Looking for our government websites? <a href="#" target="_blank">yeskinggeorge.com</a> | <a href="#" target="_blank">king-george.va.us</a></p>
+        <p>&copy; 2018 King George Economic Development and Tourism &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">List your business</a><br />Looking for our government websites? <a href="#" target="_blank">yeskinggeorge.com</a> &nbsp;|&nbsp; <a href="#" target="_blank">king-george.va.us</a></p>
       </div>
     </div>
   </footer>
