@@ -47,10 +47,8 @@
         </button>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <a href="#" id="search-icon"></a>
-        <div id="my-trip-icon" class="my-trip">
-          <a href="#">My Trip</a>
-        </div>
+        <a href="#" id="search-icon-menu" class="search-icon"></a>
+        <a href="#" id="my-trip-icon" data-count="0">My Trip</a>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Who We Are</a>
@@ -68,18 +66,18 @@
         </ul>
       </div>
     </div>
-    <div id="search-bar">
-      <form action="" method="get">
-        <div class="form-group">
-          <label for="search" class="sr-only">Search</label>
-          <div class="input-group">
-            <input type="text" class="form-control" name="s" />
-          </div>
-          <span class="input-group-btn">
-            <button class="btn- btn-search"></button>
-          </span>
-        </div>
-      </form>
+    <div class="search-bar-wrapper">
+      <div id="search-bar">
+        <form action="" method="get">
+            <label for="search" class="sr-only">Search</label>
+            <div class="input-group">
+              <input type="text" class="form-control" name="s" placeholder="Search..." />
+              <span class="input-group-btn">
+                <button class="search-icon"></button>
+              </span>
+            </div>
+        </form>
+      </div>
     </div>
   </nav>
 

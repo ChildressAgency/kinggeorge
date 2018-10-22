@@ -4,4 +4,9 @@ jQuery(document).ready(function($){
   }, function () {
     $(this).removeClass('open');
   });
+
+  $('#search-icon-menu').on('click', function(e){
+    e.preventDefault();
+    $('#search-bar').toggleClass('open');
+  });
 });

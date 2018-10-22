@@ -82,10 +82,93 @@ a{
   left:7px;
   background-position:-30px 0px;
 }
-#search-icon,
 #my-trip-icon{
   float:right;
+  padding:8px 45px 8px 15px;
+  margin-left:30px;
+  color:#fff;
+  text-decoration:none;
+  position:relative;
 }
+#my-trip-icon:hover,
+#my-trip-icon:focus,
+#my-trip-icon.active{
+  background-color:#0083ca;
+}
+#my-trip-icon::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:2px;
+  height:32px;
+  width:38px;
+  background-image:url(images/sprites.png);
+  background-position:0px -30px;
+  background-repeat:no-repeat;
+}
+#my-trip-icon::before{
+  content:attr(data-count);
+  position:absolute;
+  top:0;
+  right:-9px;
+  height:25px;
+  width:25px;
+  background-color:#f4bb3a;
+  border-radius:50%;
+  line-height:1em;
+  z-index:9;
+  padding:3%;
+  text-align: center;
+}
+
+#search-icon-menu{
+  float:right;
+  margin-left:25px;
+  margin-right:-15px;
+  position:relative;
+}
+.search-icon{
+  padding:19px 22px;
+  background-color:#477832;
+  position:relative;
+  border:none;
+}
+.search-icon::after{
+  content:"";
+  position:absolute;
+  height:28px;
+  width:27px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  background-image:url(images/sprites.png);
+  background-repeat:no-repeat;
+  background-position:0px 0px;
+}
+.search-bar-wrapper{
+  position:absolute;
+  width:100%;
+  height:45px;
+  overflow:hidden;
+  background-color:transparent;
+}
+#search-bar{
+  display:block;
+  position:absolute;
+  width:295px;
+  right:-300px;
+  background-color:#477832;
+  padding:5px 0px 2px 7px;
+  transition:right .3s ease;
+}
+#search-bar .form-control{
+  border-radius:0;
+  border:none;
+}
+#search-bar.open{
+  right:0;
+}
+
 #header-nav .navbar-nav>li>a{
   font-family:"Crimson Text", serif;
   font-weight:700;
@@ -132,8 +215,4 @@ a{
 #header-nav .dropdown-menu>li>a:hover,
 #header-nav .dropdown-menu>li>a:focus{
   background-color:transparent;
-}
-
-#search-bar{
-  display:none;
 }
