@@ -25,11 +25,19 @@ a{
   font-weight:700;
   padding:10px 50px;
 }
+.btn-main.btn-alt{
+  background-color:#0083ca;
+  border-radius:25px;
+}
 .btn-main:hover,
 .btn-main:focus{
   text-decoration:none;
   color:#fff;
   background-color:#477832;
+}
+.btn-main.btn-alt:hover,
+.btn-main.btn-alt:focus{
+  background-color:#f4bb3a;
 }
 
 .hp-hero{
@@ -246,6 +254,41 @@ a{
 .navbar-toggle .icon-bar{
   background-color:#fff;
 }
+
+.hero{
+  background-repeat:no-repeat;
+  background-size:cover;
+  height:290px;
+  position:relative;
+}
+.hero .caption{
+  position:absolute;
+  width:100%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+  z-index:3;
+}
+.hero .caption>h1{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-top:0;
+  margin-bottom:0;
+  color:#fff;
+  text-transform:uppercase;
+}
+.hero .hero-overlay{
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background-color:rgba(0,0,0,.4);
+  z-index:1;
+}
+
 
 .section-header{
   text-align:center;
@@ -479,6 +522,46 @@ a{
   padding:25px;
 }
 
+#main{
+  padding-top:40px;
+  padding-bottom:40px;
+}
+
+.page-header{
+  font-family:"Crimson Text", serif;
+  font-size:40px;
+  color:#477832;
+  border-bottom:none;
+  text-align:center;
+  margin:0px 0px 40px;
+}
+
+.attractions-list-item{
+  margin-bottom:25px;
+  break-inside:avoid;
+}
+.attractions-list-item>h3{
+  font-size:20px;
+  font-weight:700;
+  margin-top:0;
+  margin-bottom:0;
+}
+.attractions-list-item>p{
+  margin-bottom:0;
+}
+
+#map-link{
+  background-color:#364030;
+  padding-top:30px;
+  padding-bottom:30px;
+  text-align:center;
+}
+#map-link .btn-main{
+  margin-top:0;
+  font-size:24px;
+  letter-spacing: 2px;
+}
+
 .footer-main{
   background-color:#477832;
   color:#fff;
@@ -504,6 +587,9 @@ a{
   margin-right:0;
   margin-left:auto;
   margin-top:15px;
+}
+.footer-main .contact-info address{
+  margin-bottom:0;
 }
 .footer-main .social{
   text-align:right;
@@ -573,5 +659,11 @@ a{
   .footer-main .contact-info{
     text-align:center;
     max-width:none;
+  }
+}
+@media (min-width:768px){
+  .attractions-list{
+    column-count:2;
+    column-gap:75px;
   }
 }
