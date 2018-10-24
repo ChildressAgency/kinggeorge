@@ -24,9 +24,12 @@ a{
   transition:all .3s ease;
   font-weight:700;
   padding:10px 50px;
+  text-align:center;
 }
 .btn-main.btn-alt{
   background-color:#0083ca;
+}
+.btn-main.btn-rounded{
   border-radius:25px;
 }
 .btn-main:hover,
@@ -561,6 +564,118 @@ a{
   margin-top:0;
   font-size:24px;
   letter-spacing: 2px;
+}
+
+#mytrip-steps{
+  padding-top:40px;
+  padding-bottom:40px;
+}
+.mytrip-step{
+  margin-top:25px;
+  text-align:center;
+}
+.step-number{
+  display:block;
+  background-color:#0083ca;
+  border-radius:50%;
+  height:90px;
+  width:90px;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  margin-bottom:15px;
+}
+.step-number>span{
+  font-size:58px;
+  color:#fff;
+  font-weight:700;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:100%;
+}
+
+#mytrip-share-link{
+  background-color:#364030;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+#mytrip-share-link h3{
+  font-size:24px;
+  text-transform:uppercase;
+  color:#fff;
+  margin-top:0;
+  text-align:center;
+}
+#mytrip-share-link .share-link{
+  display:block;
+  max-width:865px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color:#fff;
+  color:#000;
+  padding:5px 10px;
+  width:100%;
+}
+
+#mytrip-listings .container{
+  max-width:865px;
+}
+#mytrip-listings .btn-main{
+  display:block;
+  font-size:24px;
+  letter-spacing: 2px;
+}
+#mytrip-listings h3{
+  text-align:center;
+  font-size:24px;
+  color:#0083ca;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  font-weight:700;
+  letter-spacing: 2px;
+}
+.mytrip-listing h4{
+  font-size:18px;
+  font-weight:700;
+  color:#003870;
+  text-transform:uppercase;
+  margin-bottom:0;
+}
+.mytrip-listing p{
+  font-size:16px;
+  color:#0083ca;
+}
+.trip-link{
+  color:#f4bb3a;
+  display:block;
+  padding-left:25px;
+  position:relative;
+  margin-bottom:5px;
+}
+.trip-link:hover,
+.trip-link:focus{
+  color:#f4bb3a;
+}
+.trip-link::before{
+  content:"";
+  position:absolute;
+  background-image:url(images/sprites.png);
+  background-repeat:no-repeat;
+}
+.remove-trip.trip-link::before{
+  background-position:0px -66px;
+  height:14px;
+  width:15px;
+  left:0;
+  top:4px;
+}
+.view-map.trip-link::before{
+  background-position:-41px -60px;
+  height:23px;
+  width:17px;
+  left:0;
 }
 
 .footer-main{

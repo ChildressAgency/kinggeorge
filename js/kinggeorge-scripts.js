@@ -9,4 +9,8 @@ jQuery(document).ready(function($){
     e.preventDefault();
     $('#search-bar').toggleClass('open');
   });
+
+  $('.share-link').on('focus', function(){
+    $(this).select();
+  });
 });
