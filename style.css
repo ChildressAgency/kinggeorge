@@ -678,6 +678,40 @@ a{
   left:0;
 }
 
+.poi header>.page-header{
+  text-align:left;
+  margin-bottom:5px;
+}
+.poi-address{
+  font-size:24px;
+  color:#0083ca;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:0;
+}
+.poi-phone{
+  font-size:24px;
+  color:#003870;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:0;
+}
+.poi-email{
+  font-size:18px;
+  color:#003870;
+}
+.poi .btn-main{
+  margin-top:15px;
+}
+.article-title{
+  font-size:24px;
+  color:#0083ca;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
 .footer-main{
   background-color:#477832;
   color:#fff;
