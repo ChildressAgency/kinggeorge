@@ -712,6 +712,44 @@ a{
   text-transform:uppercase;
 }
 
+#main .post-summary:first-child{
+  margin-top:0;
+}
+
+.sidebar-search .input-group{
+  border:2px solid #3f6993;
+  padding:2px;
+}
+.sidebar-search .form-control{
+  border:none;
+  box-shadow:none;
+}
+.sidebar-search .search-icon{
+  background-color:#0083ca;
+}
+.sidebar-section{
+  margin-bottom:40px;
+}
+.sidebar-section>h3{
+  font-size:18px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+.sidebar-section>ul{
+  list-style:none;
+  padding-left:0;
+}
+.sidebar-section>ul>li{
+  padding:10px 0px;
+  border-top:2px solid #3f6993;
+}
+.sidebar-section>ul>li:last-child{
+  border-bottom:2px solid #3f6993;
+}
+.sidebar-section>ul>li>a{
+  color:#000;
+}
 
 .footer-main{
   background-color:#477832;
@@ -816,5 +854,8 @@ a{
   .attractions-list{
     column-count:2;
     column-gap:75px;
+  }
+  .right-border{
+    border-right:2px solid #3f6993;
   }
 }
