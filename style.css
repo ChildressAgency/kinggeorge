@@ -751,6 +751,25 @@ a{
   color:#000;
 }
 
+.spotlight-post>h2{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:25px;
+}
+.spotlight-post>p{
+  font-size:18px;
+}
+
+.btn-main.back-to-loop{
+  background-color:#477832;
+}
+.btn-main.back-to-loop:hover,
+.btn-main.back-to-loop:focus{
+  background-color:#f4bb3a;
+}
+
 .footer-main{
   background-color:#477832;
   color:#fff;
@@ -849,6 +868,9 @@ a{
     text-align:center;
     max-width:none;
   }
+  #sidebar{
+    margin-top:60px;
+  }
 }
 @media (min-width:768px){
   .attractions-list{
@@ -857,5 +879,8 @@ a{
   }
   .right-border{
     border-right:2px solid #3f6993;
+  }
+  .prev-next{
+    float:right;
   }
 }
