@@ -61,8 +61,13 @@ function kinggeorge_add_css_meta($link, $handle){
 
 add_theme_support('post-thumbnails');
 
-register_nav_menu( 'header-nav', 'Header Navigation' );
-register_nav_menu('footer-nav', 'Footer Navigation');
+register_nav_menus(array(
+  'header-nav' => 'Header Navigation',
+  'footer-nav-1' => 'Footer Navigation 1',
+  'footer-nav-2' => 'Footer Navigation 2',
+  'footer-nav-3' => 'Footer Navigation 3'
+));
+
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
