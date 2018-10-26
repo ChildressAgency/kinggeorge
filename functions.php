@@ -59,14 +59,19 @@ function kinggeorge_add_css_meta($link, $handle){
   return $link;
 }
 
-add_theme_support('post-thumbnails');
+add_action('after_setup_theme', 'kinggeorge_setup');
+function kinggeorge_setup(){
+  add_theme_support('post-thumbnails');
 
-register_nav_menus(array(
-  'header-nav' => 'Header Navigation',
-  'footer-nav-1' => 'Footer Navigation 1',
-  'footer-nav-2' => 'Footer Navigation 2',
-  'footer-nav-3' => 'Footer Navigation 3'
-));
+  register_nav_menus(array(
+    'header-nav' => 'Header Navigation',
+    'footer-nav-1' => 'Footer Navigation 1',
+    'footer-nav-2' => 'Footer Navigation 2',
+    'footer-nav-3' => 'Footer Navigation 3'
+  ));
+
+  load_theme_textdomain('kinggeorge', get_template_directory() . '/languages');
+}
 
 /**
  * Class Name: wp_bootstrap_navwalker
@@ -278,8 +283,8 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 if(function_exists('acf_add_options_page')){
   acf_add_options_page(array(
-    'page_title' => 'General Settings',
-    'menu_title' => 'General Settings',
+    'page_title' => __('General Settings', 'kinggeorge'),
+    'menu_title' => __('General Settings', 'kinggeorge'),
     'menu_slug' => 'general-settings',
     'capability' => 'edit_posts',
     'redirect' => false
@@ -296,3 +301,16 @@ function kinggeorge_header_fallback_menu(){ ?>
     <li <?php if(is_page('explore-our-area')){ echo 'class="active"'; } ?>><a href="<?php echo home_url('explore-our-area'); ?>">Map</a></li>
   </ul>
 <?php }
+
+add_action('widgets_init', 'kinggeorge_widgets_init');
+function kinggeorge_widgets_init(){
+  register_sidebar(array(
+    'name' => __('Spotlight Sidebar', 'kinggeorge'),
+    'id' => 'spotlight-sidebar',
+    'description' => __('Sidebar for the Spotlight pages.', 'kinggeorge'),
+    'before_widget' => '<section class="sidebar-section">',
+    'after_widget' => '</section>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>'
+  ));
+}
