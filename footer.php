@@ -15,7 +15,7 @@
           <?php foreach($featured_pois as $poi): ?>
             <div class="col-sm-3">
               <?php
-                $poi_image = get_stylesheet_directory_uri() . '/images/sunset-kayaking.jpg';
+                $poi_image = get_field('default_poi_image', 'option');
                 if(has_post_thumbnail($poi)){
                   $poi_image = get_the_post_thumbnail_url($poi, 'thumbnail');
                 }
