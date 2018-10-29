@@ -15,9 +15,13 @@ class kinggeorge_poi{
     add_action('init', array($this, 'create_post_types'));
     add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
-    add_shortcode('poi_map', array($this, 'poi_map'));
+    add_shortcode('kinggeorge_poi_map', array($this, 'poi_map'));
+    add_shortcode('kinggeorge_poi_full_list', array($this, 'poi_full_list'));
 
     add_action('acf/init', 'acf_init');
+
+    add_filter('template_include', array($this, 'set_poi_types_template'));
+    add_filter('single_template', array($this, 'get_poi_template'));
   }
 
   private $google_api_key = get_field('google_api_key', 'option');
@@ -81,7 +85,37 @@ class kinggeorge_poi{
   }
 
   function poi_map(){
-    include('poi-map.php');
+    include(plugin_dir_url(__FILE__) . 'poi-map.php');
+  }
+
+  function poi_full_list(){
+    include(plugin_dir_url(__FILE__) . 'poi-full-list.php');
+  }
+
+  function set_poi_types_template($template){
+    if(is_tax('poi_types') && !is_cust_template($template)){
+      $template = plugin_dir_url(__FILE__) . 'templates/taxonomy-poi_types.php';
+    }
+  }
+
+  function is_cust_template($template_path){
+    $template = basename($template_path);
+
+    if(preg_match('/^taxonomy-poi_types((-(\S*))?).php/', $template)){
+      return true;
+    }
+
+    return false;
+  }
+
+  function get_pois_template($single_template){
+    global $post;
+
+    if($post->post_type == 'poi'){
+      $single_template = plugin_dir_url(__FILE__) . 'templates/poi_template.php';
+    }
+
+    return $single_template;
   }
 }
 
