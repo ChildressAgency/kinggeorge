@@ -1,3 +1,10 @@
+<?php if(is_tax('poi') || is_singular('poi')): ?>
+  <section id="map-link">
+    <div class="container">
+      <a href="<?php echo home_url('king-george-map'); ?>" class="btn-main btn-alt btn-rounded">Explore our area through our interactive map ></a>
+    </div>
+  </section>
+<?php endif; ?>
 <?php 
   $featured_pois = get_field('featured_points_of_interest', 'option');
   if($featured_pois): ?>
@@ -20,7 +27,7 @@
                   $poi_image = get_the_post_thumbnail_url($poi, 'thumbnail');
                 }
               ?>
-              <a href="<?php echo get_the_permalink($poi); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
+              <a href="<?php echo get_permalink($poi); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
                 <div class="caption">
                   <h3><?php echo get_the_title($poi): ?></h3>
                 </div>
