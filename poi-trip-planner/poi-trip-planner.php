@@ -10,6 +10,8 @@
 
 if(!defined('ABSPATH')){ exit; }
 
+define(POI_PLUGIN_DIR, plugin_dir_url(__FILE__));
+
 class kinggeorge_poi{
   public function __construct(){
     add_action('init', array($this, 'create_post_types'));
@@ -81,6 +83,24 @@ class kinggeorge_poi{
     wp_enqueue_script(
       'google_map_api',
       '//maps.googleapis.com/maps/api/js?key=' . $this->google_api_key;
+    );
+    wp_enqueue_script(
+      'poi-scripts.js',
+      POI_PLUGIN_DIR . '/js/poi-scripts.js',
+      array('jquery'),
+      null,
+      true
+    );
+    wp_enqueue_script(
+      'prettyPhoto-js',
+      POI_PLUGIN_DIR . '/prettyPhoto/js/jquery.prettyPhoto.js',
+      array('jquery'),
+      null,
+      true
+    );
+    wp_enqueue_style(
+      'prettyPhoto-css',
+      POI_PLUGIN_DIR . '/prettyPhoto/css/prettyPhoto.css'
     )
   }
 
