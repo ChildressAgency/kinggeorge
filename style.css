@@ -764,6 +764,7 @@ a{
   letter-spacing:2px;
   text-transform:uppercase;
   margin-bottom:25px;
+  margin-top:0;
 }
 .spotlight-post>p{
   font-size:18px;
@@ -775,6 +776,28 @@ a{
 .btn-main.back-to-loop:hover,
 .btn-main.back-to-loop:focus{
   background-color:#f4bb3a;
+}
+
+#history-nav ul>li{
+  text-align:right;
+  padding-bottom:15px;
+}
+
+#history-nav ul>li>a{
+  color:#000;
+  opacity:.5;
+}
+#history-nav ul>li>a:hover,
+#history-nav ul>li>a:focus{
+  opacity:1;
+  text-decoration:none;
+}
+#history-nav ul>li.active,
+#history-nav ul>li.active>a{
+  font-size:20px;
+  font-weight:700;
+  color:#000;
+  opacity:1;
 }
 
 .footer-main{
