@@ -67,7 +67,8 @@ function kinggeorge_setup(){
     'header-nav' => 'Header Navigation',
     'footer-nav-1' => 'Footer Navigation 1',
     'footer-nav-2' => 'Footer Navigation 2',
-    'footer-nav-3' => 'Footer Navigation 3'
+    'footer-nav-3' => 'Footer Navigation 3',
+    'history-nav' => 'History Pages Navigation'
   ));
 
   load_theme_textdomain('kinggeorge', get_template_directory() . '/languages');
