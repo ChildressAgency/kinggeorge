@@ -13,7 +13,7 @@
                 <p class="poi-phone"><?php the_field('phone'); ?></p>
                 <p class="poi-email"><?php the_field('email'); ?></p>
               </header>
-              <a href="#" class="btn-main btn-rounded add-to-trip">+ Add to Trip</a>
+              <a href="#" class="btn-main btn-rounded add-to-trip" data-poi_id="<?php echo get_the_ID(); ?>">+ Add to Trip</a>
               <h3 class="article-title">Details:</h3>
               <?php the_content(); ?>
           <?php endwhile; endif; ?>

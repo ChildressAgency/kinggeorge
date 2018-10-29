@@ -19,6 +19,7 @@ class kinggeorge_poi{
 
     add_shortcode('kinggeorge_poi_map', array($this, 'poi_map'));
     add_shortcode('kinggeorge_poi_full_list', array($this, 'poi_full_list'));
+    add_shortcode('kinggeorge_poi_mytrip', array($this, 'poi_mytrip'));
 
     add_action('acf/init', 'acf_init');
 
@@ -85,13 +86,6 @@ class kinggeorge_poi{
       '//maps.googleapis.com/maps/api/js?key=' . $this->google_api_key;
     );
     wp_enqueue_script(
-      'poi-scripts.js',
-      POI_PLUGIN_DIR . '/js/poi-scripts.js',
-      array('jquery'),
-      null,
-      true
-    );
-    wp_enqueue_script(
       'prettyPhoto-js',
       POI_PLUGIN_DIR . '/prettyPhoto/js/jquery.prettyPhoto.js',
       array('jquery'),
@@ -101,20 +95,34 @@ class kinggeorge_poi{
     wp_enqueue_style(
       'prettyPhoto-css',
       POI_PLUGIN_DIR . '/prettyPhoto/css/prettyPhoto.css'
-    )
+    );
+    wp_enqueue_script(
+      'js-cookie',
+      POI_PLUGIN_DIR . '/js/js-cookie.js',
+      array('jquery'),
+      null,
+      true
+    );
+    wp_enqueue_script(
+      'poi-scripts.js',
+      POI_PLUGIN_DIR . '/js/poi-scripts.js',
+      array('jquery'),
+      null,
+      true
+    );
   }
 
   function poi_map(){
-    include(plugin_dir_url(__FILE__) . 'poi-map.php');
+    include(POI_PLUGIN_DIR . 'poi-map.php');
   }
 
   function poi_full_list(){
-    include(plugin_dir_url(__FILE__) . 'poi-full-list.php');
+    include(POI_PLUGIN_DIR . 'poi-full-list.php');
   }
 
   function set_poi_types_template($template){
     if(is_tax('poi_types') && !is_cust_template($template)){
-      $template = plugin_dir_url(__FILE__) . 'templates/taxonomy-poi_types.php';
+      $template = POI_PLUGIN_DIR . 'templates/taxonomy-poi_types.php';
     }
   }
 
@@ -132,10 +140,14 @@ class kinggeorge_poi{
     global $post;
 
     if($post->post_type == 'poi'){
-      $single_template = plugin_dir_url(__FILE__) . 'templates/poi_template.php';
+      $single_template = POI_PLUGIN_DIR . 'templates/poi_template.php';
     }
 
     return $single_template;
+  }
+
+  function poi_mytrip(){
+    include(POI_PLUGIN_DIR . 'poi-mytrip.php');
   }
 }
 

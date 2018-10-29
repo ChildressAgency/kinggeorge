@@ -26,7 +26,74 @@ jQuery(document).ready(function($){
     add_markers(pois);
   });
 
+  //set header counter and btns for my-trip
+  update_my_trip_counter();
+  update_my_trip_btns();
+
+  //add to trip
+  $('.add-to-trip').on('click', function(e){
+    e.preventDefault();
+    var poiId = $(this).data('poi_id');
+    var poiIds = '';
+    var savedPois_cookie = Cookies.get('poi_ids');
+
+    if(savedPois_cookie){
+      var savedPois = savedPois_cookie.split(',').map(Number);
+
+      if(savedPois.indexOf(poiId) < 0){
+        savedPois.push(poiId);
+        poiIds = savedPois.toString();
+      }
+    }
+    else{
+      poiIds = poiId;
+    }
+
+    Cookies.set('poi_ids', poiIds, { expires:30 });
+    update_my_trip_btns();
+  });
+
+  //remove from trip
+  $('.remove-from-trip').on('click', function(e){
+    e.preventDefault();
+    var poiId = $(this).data('poi_id');
+    var poiIds = '';
+    var savedPois_cookie = Cookies.get('poi_ids');
+
+    if(savedPois_cookie){
+      var savedPois = savedPois_cookie.split(',').map(Number);
+
+      var poiIdIndex = savedPois.indexOf(poiId);
+
+      if(poiIdIndex > -1){
+        savedPois.splice(poiIdIndex, 1);
+        poiIds = savedPois.toString();
+
+        Cookies.set('poi_ids', poiIds, { expires:30 });
+        location.reload();
+      }
+    }
+  });
 });
+
+function update_my_trip_counter(){
+  var savedPois_cookie = Cookies.get('poi_ids');
+  $('#my-trip-icon').attr('data-count', savedPois_cookie.length);
+}
+
+function update_my_trip_btns(){
+  var savedPois_cookie = Cookies.get('poi_ids');
+  var $tripBtn = $('.add-to-trip');
+  var currentPoiId = $tripBtn.data('poi_id');
+
+  if(savedPois_cookie){
+    var savedPois = savedPois_cookie.split(',').map(Number);
+    if(savedPois.indexOf(currentPoiId) >= 0){
+      $tripBtn.removeClass('add-to-trip').addClass('remove-from-trip');
+      $tripBtn.text('X Remove From Trip');
+    }
+  }
+}
 
 function new_map($el) {
   //38.264493,-77.2198848
