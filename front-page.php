@@ -2,25 +2,25 @@
   <section id="quick-links">
     <div class="container">
       <header class="section-header">
-        <h2><?php the_field('featured_poi_categories_title'); ?></h2>
-        <p><?php the_field('featured_poi_categories_subtitle'); ?></p>
+        <h2><?php the_field('featured_poi_types_title'); ?></h2>
+        <p><?php the_field('featured_poi_types_subtitle'); ?></p>
       </header>
       <?php
-        $featured_poi_categories = get_field('featured_poi_categories'); 
+        $featured_poi_categories = get_field('featured_poi_types'); 
         if($featured_poi_categories): ?>
           <div class="row">
             <?php foreach($featured_poi_categories as $poi_id): ?>
               <div class="col-sm-3">
                 <?php 
                   $poi_image = get_field('default_poi_image', 'option'); 
-                  if(get_field('category_image')){
-                    $category_image = get_field('category_image', 'poi_' . $poi_id);
+                  if(get_field('poi_type_image')){
+                    $category_image = get_field('poi_type_image', 'poi_type_' . $poi_id);
                     $poi_image = $category_image['url'];
                   }
 
-                  $poi_term_link = get_term_link($poi_id, 'poi');
+                  $poi_term_link = get_term_link($poi_id, 'poi_types');
 
-                  $poi_term_object = get_term($poi_id, 'poi');
+                  $poi_term_object = get_term($poi_id, 'poi_types');
                   $poi_term_name = $poi_term_object->name;
                 ?>
                 <a href="<?php echo $poi_term_link; ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
