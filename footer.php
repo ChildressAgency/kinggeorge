@@ -5,6 +5,7 @@
     </div>
   </section>
 <?php endif; ?>
+
 <?php 
   $featured_pois = get_field('featured_points_of_interest', 'option');
   if($featured_pois): ?>
@@ -41,19 +42,19 @@
 <?php endif; ?>
 
 <?php if(is_front_page()): ?>
-  <?php if(have_rows('alliances', 'option')): ?>
+  <?php if(have_rows('alliances')): ?>
     <section id="alliances">
       <div class="container">
         <header class="section-header">
-          <?php if(get_field('alliances_section_title', 'option')): ?>
-            <h2><?php the_field('alliances_section_title', 'option'); ?></h2>
-          <?php endif; if(get_field('alliances_section_subtitle', 'option')): ?>
-            <p><?php the_field('alliances_section_subtitle', 'option'); ?></p>
+          <?php if(get_field('alliances_section_title')): ?>
+            <h2><?php the_field('alliances_section_title'); ?></h2>
+          <?php endif; if(get_field('alliances_section_subtitle')): ?>
+            <p><?php the_field('alliances_section_subtitle'); ?></p>
           <?php endif; ?>
         </header>
 
         <ul class="list-unstyled list-inline">
-          <?php while(have_rows('alliances', 'option')): the_row(); ?>
+          <?php while(have_rows('alliances')): the_row(); ?>
             <li>
               <a href="<?php the_sub_field('alliance_link'); ?>">
                 <?php $alliance_image = get_sub_field('alliance_image'); ?>
