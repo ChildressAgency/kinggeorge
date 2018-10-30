@@ -10,7 +10,7 @@
 
 if(!defined('ABSPATH')){ exit; }
 
-define(POI_PLUGIN_DIR, plugin_dir_url(__FILE__));
+define('POI_PLUGIN_DIR', plugin_dir_url(__FILE__));
 
 class kinggeorge_poi{
   public function __construct(){
@@ -29,14 +29,14 @@ class kinggeorge_poi{
     add_filter('single_template', array($this, 'get_poi_template'));
   }
 
-  private $google_api_key = get_field('google_api_key', 'option');
+  //private $google_api_key = get_field('google_api_key', 'option');
 
   function kinggeorge_load_textdomain(){
     load_plugin_textdomain('poi', false, basename(dirname(__FILE__)) . '/languages');
   }
 
   function create_post_types(){
-    $poi_labels => array(
+    $poi_labels = array(
       'name' => __('Points of Interest', 'poi_trip_planner'),
       'singular_name' => __('Point of Interest', 'poi_trip_planner'),
       'menu_name' => __('Points of Interest', 'poi_trip_planner'),
@@ -46,7 +46,7 @@ class kinggeorge_poi{
       'view_item' => __('View Point of Interest', 'poi_trip_planner'),
       'all_items' => __('All Points of Interest', 'poi_trip_planner'),
       'new_item' => __('New Point of Interest', 'poi_trip_planner'),
-      'not_found' => __('No Points of Interest Found' 'poi_trip_planner')
+      'not_found' => __('No Points of Interest Found', 'poi_trip_planner')
     );
     $poi_args = array(
       'labels' => $poi_labels,
@@ -75,15 +75,15 @@ class kinggeorge_poi{
         'show_admin_column' => true,
         'public' => true,
         'labels' => array(
-          'name' => 'Point of Interest Types',
-          'singular_name' => 'Point of Interest Type'
+          'name' => __('Point of Interest Types', 'poi_trip_planner'),
+          'singular_name' => __('Point of Interest Type', 'poi_trip_planner')
         )
       )
     );
   }
 
   function acf_init(){
-    acf_update_setting('google_api_key', $this->google_api_key);
+    acf_update_setting('google_api_key', get_field('google_api_key', 'option'));
     add_poi_acf_field_groups();
   }
 
@@ -102,7 +102,7 @@ class kinggeorge_poi{
   function enqueue_scripts(){
     wp_enqueue_script(
       'google_map_api',
-      '//maps.googleapis.com/maps/api/js?key=' . $this->google_api_key;
+      '//maps.googleapis.com/maps/api/js?key=' . get_field('google_api_key', 'option')
     );
     wp_enqueue_script(
       'prettyPhoto-js',
