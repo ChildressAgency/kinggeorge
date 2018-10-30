@@ -47,7 +47,7 @@ if(!defined('ABSPATH')){ exit; } ?>
       </nav>
     </div>
     <div class="col-sm-7 col-md-8">
-      <div id="poi-map">
+      <div id="poi-map" class="poi-map">
 
       </div>
     </div>
