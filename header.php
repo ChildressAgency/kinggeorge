@@ -10,7 +10,7 @@
   <meta http-equiv="cache-control" content="public">
   <meta http-equiv="cache-control" content="private">
 
-  <title><?php echo get_blog_title('name'); ?></title>
+  <title><?php echo bloginfo('name'); ?></title>
 
   <?php wp_head(); ?>
 
@@ -49,7 +49,7 @@
           </div>
         </div>
         <a href="#" id="search-icon-menu" class="search-icon hidden-xs"></a>
-        <a href="<?php echo home_url('my-trip'); ?>" id="my-trip-icon" data-count="<?php echo do_shortcode('[kinggeorge_mytrip_saved_count]'); ?>">My Trip</a>
+        <a href="<?php echo home_url('my-trip'); ?>" id="my-trip-icon" data-count="0">My Trip</a>
         <?php
           $header_nav_args = array(
             'theme_location' => 'header-nav',
