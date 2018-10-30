@@ -50,6 +50,9 @@
       <?php if(get_field('instagram', 'option')): ?>
         <a href="<?php the_field('instagram', 'option'); ?>" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
       <?php endif; ?>
+      <div class="instagram-feed">
+        <?php echo do_shortcode('[instagram-feed]'); ?>
+      </div>
     </div>
   </section>
 
