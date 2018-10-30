@@ -1,13 +1,14 @@
 jQuery(document).ready(function($){
-  //creat map on page load
+  //create map on page load
   map = new_map('.poi-map');
 
   //when user clicks a dropdown, add markers to map
   $('#poi-nav').on('show.bs.dropdown', function(){
-    var markers = [];
     var pois = {};
     $(this).find('.open>.dropdown-menu>li').each(function(index){
       //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
+  
+      var markers = [];
       markers['title'] = $(this).find('a').data('poi_title');
       markers['description'] = $(this).find('a').data('poi_description');
       markers['website'] = $(this).find('a').data('poi_website');
@@ -22,9 +23,9 @@ jQuery(document).ready(function($){
 
   //show the mytrip map
   $('#mytrip-map').on('show.bs.collapse', function(){
-    var markers = [];
     var pois = {};
     $('.mytrip-listing').each(function(index){
+      var markers = [];
       markers['title'] = $(this).data('poi_title');
       markers['description'] = $(this).data('poi_description');
       markers['website'] = $(this).data('poi_website');

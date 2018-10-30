@@ -72,8 +72,11 @@
 
   <?php if(!is_front_page()): ?>
     <?php 
-      $hero_image = get_stylesheet_directory_uri() . '/images/pond.jpg';
-      $hero_image_css = 'background-position:center center;';
+      //$hero_image = get_stylesheet_directory_uri() . '/images/pond.jpg';
+      //$hero_image_css = 'background-position:center center;';
+      $hero_image = get_field('default_hero_image', 'option');
+      $hero_image_css = get_field('default_hero_image_css', 'option');
+
       if(get_field('hero_image')){
         $hero_image = get_field('hero_image');
         if(get_field('hero_image_css')){
@@ -85,17 +88,17 @@
       }
 
       $hero_caption = '';
-      if(get_field('hero_caption')){
-        $hero_caption = '<h1>' . get_field('hero_caption') . '</h1>';
-      }
-      elseif(is_home() || is_singular('post')){
+      if(is_home() || is_singular('post')){
         $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="Spotlight" />';
       }
-      elseif(is_tax('pois') || has_term('', 'pois')){
+      elseif(is_tax('poi_types') || has_term('', 'poi_types')){
         $current_term_id = get_queried_object()->term_id;
-        $current_term = get_term($current_term_id, 'pois');
+        $current_term = get_term($current_term_id, 'poi_types');
         //either show the current term or parent if it has one
-        $hero_caption = '<h1>' . ($term->parent == 0) ? $current_term : get_term($current_term->parent, 'pois') . '</h1>';
+        $hero_caption = '<h1>' . ($term->parent == 0) ? $current_term : get_term($current_term->parent, 'poi_types') . '</h1>';
+      }
+      elseif(get_field('hero_caption')){
+        $hero_caption = '<h1>' . get_field('hero_caption') . '</h1>';
       }
       else{
         $hero_caption = '<h1>' . get_the_title() . '</h1>';

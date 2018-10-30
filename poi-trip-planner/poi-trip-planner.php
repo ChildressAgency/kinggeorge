@@ -16,6 +16,8 @@ class kinggeorge_poi{
   public function __construct(){
     add_action('init', array($this, 'create_post_types'));
     add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+    add_action('init', array($this, 'register_acf_options_page'));
+    add_action('init', array($this, 'kinggeorge_load_textdomain'));
 
     add_shortcode('kinggeorge_poi_map', array($this, 'poi_map'));
     add_shortcode('kinggeorge_poi_full_list', array($this, 'poi_full_list'));
@@ -28,6 +30,10 @@ class kinggeorge_poi{
   }
 
   private $google_api_key = get_field('google_api_key', 'option');
+
+  function kinggeorge_load_textdomain(){
+    load_plugin_textdomain('poi', false, basename(dirname(__FILE__)) . '/languages');
+  }
 
   function create_post_types(){
     $poi_labels => array(
@@ -78,6 +84,19 @@ class kinggeorge_poi{
 
   function acf_init(){
     acf_update_setting('google_api_key', $this->google_api_key);
+    add_poi_acf_field_groups();
+  }
+
+  function register_acf_options_page(){
+    if(function_exists('acf_add_options_page')){
+      acf_add_options_page(array(
+        'page_title' => __('POI General Settings', 'poi_trip_planner'),
+        'menu_title' => __('POI General Settings', 'poi_trip_planner'),
+        'menu_slug' => 'poi-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false
+      ));
+    }
   }
 
   function enqueue_scripts(){
@@ -148,6 +167,125 @@ class kinggeorge_poi{
 
   function poi_mytrip(){
     include(POI_PLUGIN_DIR . 'poi-mytrip.php');
+  }
+
+  function add_poi_acf_field_groups(){
+    acf_add_local_field_group(array(
+      'key' => 'group_1',
+      'title' => 'POI Settings',
+      'fields' => array(
+        array(
+          'key' => 'field_1',
+          'label' => 'Street Address',
+          'name' => 'street_address',
+          'type' => 'text'
+        ),
+        array(
+          'key' => 'field_2',
+          'label' => 'City, State, Zip',
+          'name' => 'city_state_zip',
+          'type' => 'text'
+        ),
+        array(
+          'key' => 'field_3',
+          'label' => 'Phone',
+          'name' => 'phone',
+          'type' => 'text'
+        ),
+        array(
+          'key' => 'field_4',
+          'label' => 'Email',
+          'name' => 'email',
+          'type' => 'email'
+        ),
+        array(
+          'key' => 'field_5',
+          'label' => 'Website',
+          'name' => 'website',
+          'type' => 'link'
+        ),
+        array(
+          'key' => 'field_6',
+          'label' => 'Map Description',
+          'name' => 'map_description',
+          'type' => 'textarea',
+          'rows' => '4',
+          'new_lines' => 'wpautop',
+          'instructions' => 'Short description of attraction.'
+        ),
+        array(
+          'key' => 'field_7',
+          'label' => 'Location',
+          'name' => 'location',
+          'type' => 'google_map',
+          'center' => array(
+            'center_lat' => '38.264493',
+            'center_lng' => '-77.2198848'
+          )
+        ),
+        array(
+          'key' => 'field_8',
+          'label' => 'Gallery',
+          'name' => 'gallery',
+          'type' => 'gallery'
+        )
+      ),
+      'location' => array(
+        array(
+          array(
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'poi'
+          )
+        )
+      ),
+      'position' => 'acf_after_title'
+    ));
+
+    acf_add_local_field_group(array(
+      'key' => 'group_2',
+      'title' => 'Default POI Image Setting',
+      'fields' => array(
+        array(
+          'key' => 'field_11',
+          'label' => 'Default POI Image',
+          'name' => 'default_poi_image',
+          'type' => 'image',
+          'return_format' => 'url'
+        )
+      ),
+      'location' => array(
+        array(
+          array(
+            'param' => 'options_page',
+            'operator' => '==',
+            'value' => 'poi-general-options'
+          )
+        )
+      )
+    ));
+
+    acf_add_local_field_group(array(
+      'key' => 'group_3',
+      'title' => 'POI Type Settings',
+      'fields' => array(
+        array(
+          'key' => 'field_21',
+          'label' => 'POI Type Page Header',
+          'name' => 'poi_type_page_header',
+          'type' => 'text'
+        )
+      ),
+      'location' => array(
+        array(
+          array(
+            'param' => 'taxonomy_term',
+            'operator' => '==',
+            'value' => 'poi_type'
+          )
+        )
+      )
+    ));
   }
 }
 

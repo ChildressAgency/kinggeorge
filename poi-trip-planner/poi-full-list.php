@@ -12,7 +12,7 @@
       <div class="attractions-list-item" role="list-item">
         <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
         <p><?php the_field('street_address'); ?><br /><?php the_field('city_state_zip'); ?></p>
-        <p><?php the_field('phone_number'); ?></p>
+        <p><?php the_field('phone'); ?></p>
         <?php 
           $website = get_field('website');
           $website_title = $website['title'];
@@ -21,7 +21,7 @@
           }
         ?>
         <p><a href="<?php echo $website['url']; ?>" target="_blank"><?php echo $website_title; ?></a></p>
-        <p><?php the_field('short_description'); ?></p>
+        <p><?php the_field('map_description'); ?></p>
       </div>
   <?php endwhile; endif; ?>
 </div>

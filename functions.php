@@ -295,8 +295,8 @@ if(function_exists('acf_add_options_page')){
 function kinggeorge_header_fallback_menu(){ ?>
   <ul class="nav navbar-nav navbar-right">
     <li <?php if(is_page('who-we-are')){ echo 'class="active"'; } ?>><a href="<?php echo home_url('who-we-are'); ?>">Who We Are</a></li>
-    <li <?php if(has_term('activities', 'pois')){ echo 'class="active"'; } ?>><a href="<?php echo get_term_link('activities', 'pois'); ?>">Activities</a></li>
-    <li <?php if(has_term('lodging-food', 'pois')){ echo 'class="active"'; } ?>><a href="<?php echo get_term_link('lodging-food', 'pois'); ?>">Lodging & Food</a></li>
+    <li <?php if(has_term('activities', 'poi_types')){ echo 'class="active"'; } ?>><a href="<?php echo get_term_link('activities', 'poi_types'); ?>">Activities</a></li>
+    <li <?php if(has_term('lodging-food', 'pois')){ echo 'class="active"'; } ?>><a href="<?php echo get_term_link('lodging-food', 'poi_types'); ?>">Lodging & Food</a></li>
     <li <?php if(is_home() || is_singular('post')){ echo 'class="active"'; } ?>><a href="<?php echo home_url('spotlight'); ?>">Spotlight</a></li>
     <li><a href="#">Events</a></li>
     <li <?php if(is_page('explore-our-area')){ echo 'class="active"'; } ?>><a href="<?php echo home_url('explore-our-area'); ?>">Map</a></li>
