@@ -1,26 +1,37 @@
 jQuery(document).ready(function($){
   //creat map on page load
-  map = new_map('#poi-map');
+  map = new_map('.poi-map');
 
   //when user clicks a dropdown, add markers to map
   $('#poi-nav').on('show.bs.dropdown', function(){
     var markers = [];
+    var pois = {};
     $(this).find('.open>.dropdown-menu>li').each(function(index){
       //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
-      var poiTitle = $(this).find('a').data('poi_title');
-      var poiDescription = $(this).find('a').data('poi_description');
-      var poiWebsite = $(this).find('a').data('poi_website');
-      var poiLat = $(this).find('a').data('lat');
-      var poiLng = $(this).find('a').data('lng');
+      markers['title'] = $(this).find('a').data('poi_title');
+      markers['description'] = $(this).find('a').data('poi_description');
+      markers['website'] = $(this).find('a').data('poi_website');
+      markers['lat'] = $(this).find('a').data('lat');
+      markers['lng'] = $(this).find('a').data('lng');
 
-      var pois = {};
-      poi['title'] = poiTitle;
-      poi['description'] = poiDescription;
-      poi['website'] = poiWebsite;
-      poi['lat'] = poiLat;
-      poi['lng'] = poiLng;
+      pois.push(markers);
+    });
 
-      pois.push(poi);
+    add_markers(pois);
+  });
+
+  //show the mytrip map
+  $('#mytrip-map').on('show.bs.collapse', function(){
+    var markers = [];
+    var pois = {};
+    $('.mytrip-listing').each(function(index){
+      markers['title'] = $(this).data('poi_title');
+      markers['description'] = $(this).data('poi_description');
+      markers['website'] = $(this).data('poi_website');
+      markers['lat'] = $(this).data('poi_lat');
+      markers['lng'] = $(this).data('poi_lng');
+
+      pois.push(markers);
     });
 
     add_markers(pois);
