@@ -160,7 +160,7 @@
           <?php if(have_rows('government_sites', 'option')): ?>
             Looking for our government websites? 
             <?php 
-              $site_link = get_field('government_sites');
+              $site_link = get_field('government_sites', 'option');
               for($s = 0; $s < count($site_link; $s++)): ?>
                 <a href="<?php echo $site_link['site_link']['url']; ?>" target="<?php echo $site_link['site_link']['target']; ?>"><?php echo $site_link['site_link']['title']; ?></a>
                 <?php if($s !== count($site_link) - 1){ echo ' &nbsp;|&nbsp; '; } ?>
