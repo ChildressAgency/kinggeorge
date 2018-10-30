@@ -1,7 +1,7 @@
 <?php
 /*
-  Plugin Name: King George Point of Interest Trip Planner
-  Description: Plan trips to points of interest in King George
+  Plugin Name: Point of Interest Trip Planner
+  Description: Plan trips to points of interest
   Author: The Childress Agency
   Author URI: https://childressagency.com
   Version: 1.0
@@ -12,18 +12,19 @@ if(!defined('ABSPATH')){ exit; }
 
 define('POI_PLUGIN_DIR', plugin_dir_url(__FILE__));
 
-class kinggeorge_poi{
+class poi_trip_planner{
   public function __construct(){
     add_action('init', array($this, 'create_post_types'));
     add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
     add_action('init', array($this, 'register_acf_options_page'));
-    add_action('init', array($this, 'kinggeorge_load_textdomain'));
+    add_action('init', array($this, 'poi_load_textdomain'));
 
-    add_shortcode('kinggeorge_poi_map', array($this, 'poi_map'));
-    add_shortcode('kinggeorge_poi_full_list', array($this, 'poi_full_list'));
-    add_shortcode('kinggeorge_poi_mytrip', array($this, 'poi_mytrip'));
+    add_shortcode('poi_map', array($this, 'poi_map'));
+    add_shortcode('poi_full_list', array($this, 'poi_full_list'));
+    add_shortcode('poi_mytrip', array($this, 'poi_mytrip'));
 
-    add_action('acf/init', 'acf_init');
+    add_action('acf/init', array($this, 'acf_init'));
+    add_action('acf/init', array($this, 'add_poi_acf_field_groups'));
 
     add_filter('template_include', array($this, 'set_poi_types_template'));
     add_filter('single_template', array($this, 'get_poi_template'));
@@ -31,7 +32,7 @@ class kinggeorge_poi{
 
   //private $google_api_key = get_field('google_api_key', 'option');
 
-  function kinggeorge_load_textdomain(){
+  function poi_load_textdomain(){
     load_plugin_textdomain('poi', false, basename(dirname(__FILE__)) . '/languages');
   }
 
@@ -76,7 +77,19 @@ class kinggeorge_poi{
         'public' => true,
         'labels' => array(
           'name' => __('Point of Interest Types', 'poi_trip_planner'),
-          'singular_name' => __('Point of Interest Type', 'poi_trip_planner')
+          'singular_name' => __('Point of Interest Type', 'poi_trip_planner'),
+          'all_items' => __('All Points of Interest Types', 'poi_trip_planner'),
+          'edit_item' => __('Edit Point of Interest Type', 'poi_trip_planner'),
+          'view_item' => __('View Point of Interest Type', 'poi_trip_planner'),
+          'update_item' => __('Update Point of Interest Type', 'poi_trip_planner'),
+          'add_new_item' => __('Add New Point of Interest Type', 'poi_trip_planner'),
+          'new_item_name' => __('New Point of Interest Type Name', 'poi_trip_planner'),
+          'parent_item' => __('Parent Point of Interest Type', 'poi_trip_planner'),
+          'search_items' => __('Search Point of Interest Types', 'poi_trip_planner'),
+          'popular_items' => __('Popular Point of Interest Types', 'poi_trip_planner'),
+          'add_or_remove_items' => __('Add or Remove Point of Interest Types', 'poi_trip_planner'),
+          'not_found' => __('No Point of Interest Types Found', 'poi_trip_planner'),
+          'back_to_items' => __('Back to Point of Interest Types', 'poi_trip_planner')
         )
       )
     );
@@ -84,7 +97,6 @@ class kinggeorge_poi{
 
   function acf_init(){
     acf_update_setting('google_api_key', get_field('google_api_key', 'option'));
-    add_poi_acf_field_groups();
   }
 
   function register_acf_options_page(){
@@ -132,17 +144,19 @@ class kinggeorge_poi{
   }
 
   function poi_map(){
-    include(POI_PLUGIN_DIR . 'poi-map.php');
+    include(POI_PLUGIN_DIR . '/poi-map.php');
   }
 
   function poi_full_list(){
-    include(POI_PLUGIN_DIR . 'poi-full-list.php');
+    include(POI_PLUGIN_DIR . '/poi-full-list.php');
   }
 
   function set_poi_types_template($template){
     if(is_tax('poi_types') && !is_cust_template($template)){
-      $template = POI_PLUGIN_DIR . 'templates/taxonomy-poi_types.php';
+      $template = POI_PLUGIN_DIR . '/templates/taxonomy-poi_types.php';
     }
+
+    return $template;
   }
 
   function is_cust_template($template_path){
@@ -155,18 +169,18 @@ class kinggeorge_poi{
     return false;
   }
 
-  function get_pois_template($single_template){
+  function get_poi_template($single_template){
     global $post;
 
     if($post->post_type == 'poi'){
-      $single_template = POI_PLUGIN_DIR . 'templates/poi_template.php';
+      $single_template = POI_PLUGIN_DIR . '/templates/poi_template.php';
     }
 
     return $single_template;
   }
 
   function poi_mytrip(){
-    include(POI_PLUGIN_DIR . 'poi-mytrip.php');
+    include(POI_PLUGIN_DIR . '/poi-mytrip.php');
   }
 
   function add_poi_acf_field_groups(){
@@ -218,10 +232,8 @@ class kinggeorge_poi{
           'label' => 'Location',
           'name' => 'location',
           'type' => 'google_map',
-          'center' => array(
-            'center_lat' => '38.264493',
-            'center_lng' => '-77.2198848'
-          )
+          'center_lat' => '38.264493',
+          'center_lng' => '-77.2198848'
         ),
         array(
           'key' => 'field_8',
@@ -244,14 +256,21 @@ class kinggeorge_poi{
 
     acf_add_local_field_group(array(
       'key' => 'group_2',
-      'title' => 'Default POI Image Setting',
+      'title' => 'Default POI Settings',
       'fields' => array(
         array(
           'key' => 'field_11',
           'label' => 'Default POI Image',
           'name' => 'default_poi_image',
           'type' => 'image',
-          'return_format' => 'url'
+          'return_format' => 'url',
+          'preview_size' => 'full'
+        ),
+        array(
+          'key' => 'field_12',
+          'label' => 'Google Map API Key',
+          'name' => 'google_api_key',
+          'type' => 'text',
         )
       ),
       'location' => array(
@@ -259,7 +278,7 @@ class kinggeorge_poi{
           array(
             'param' => 'options_page',
             'operator' => '==',
-            'value' => 'poi-general-options'
+            'value' => 'poi-general-settings'
           )
         )
       )
@@ -274,14 +293,22 @@ class kinggeorge_poi{
           'label' => 'POI Type Page Header',
           'name' => 'poi_type_page_header',
           'type' => 'text'
+        ),
+        array(
+          'key' => 'field_22',
+          'label' => 'POI Type Image',
+          'name' => 'poi_type_image',
+          'type' => 'image',
+          'return_type' => 'array',
+          'preview_size' => 'full'
         )
       ),
       'location' => array(
         array(
           array(
-            'param' => 'taxonomy_term',
+            'param' => 'taxonomy',
             'operator' => '==',
-            'value' => 'poi_type'
+            'value' => 'poi_types'
           )
         )
       )
@@ -289,4 +316,4 @@ class kinggeorge_poi{
   }
 }
 
-new kinggeorge_poi;
+new poi_trip_planner;
