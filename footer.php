@@ -30,7 +30,7 @@
               ?>
               <a href="<?php echo get_permalink($poi); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
                 <div class="caption">
-                  <h3><?php echo get_the_title($poi): ?></h3>
+                  <h3><?php echo get_the_title($poi); ?></h3>
                 </div>
                 <div class="quick-link-overlay"></div>
               </a>
@@ -79,9 +79,10 @@
             <div class="row">
               <div class="col-sm-4">
                 <?php
-                  $footer_nav_1 = get_term('footer-nav-1', 'nav_menu');
+                  $footer_nav_1 = kinggeorge_get_menu_by_location('footer-nav-1');
+                  $footer_nav_1_title = $footer_nav_1 ? esc_html($footer_nav_1->name) : '';
                   $footer_nav_1_args = array(
-                    'theme_location' => '_no_such_location',
+                    'theme_location' => 'footer-nav-1',
                     'menu' => 'Footer Navigation 1',
                     'container' => '',
                     'container_id' => '',
@@ -89,7 +90,7 @@
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' .esc_html($footer_nav_1->name) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . $footer_nav_1_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_1_args);
@@ -97,9 +98,10 @@
               </div>
               <div class="col-sm-4">
                 <?php
-                  $footer_nav_2 = get_term('footer-nav-2', 'nav_menu');
+                  $footer_nav_2 = kinggeorge_get_menu_by_location('footer-nav-2');
+                  $footer_nav_2_title = $footer_nav_2 ? esc_html($footer_nav_2->name) : '';
                   $footer_nav_2_args = array(
-                    'theme_location' => '_no_such_location',
+                    'theme_location' => 'footer-nav-2',
                     'menu' => 'Footer Navigation 2',
                     'container' => '',
                     'container_id' => '',
@@ -107,7 +109,7 @@
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' . esc_html($footer_nav_2->name) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . $footer_nav_2_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_2_args);
@@ -115,9 +117,10 @@
               </div>
               <div class="col-sm-4">
                 <?php 
-                  $footer_nav_3 = get_term('footer-nav-3', 'nav_menu');
+                  $footer_nav_3 = kinggeorge_get_menu_by_location('footer-nav-3');
+                  $footer_nav_3_title = $footer_nav_3 ? esc_html($footer_nav_3->name) : '';
                   $footer_nav_3_args = array(
-                    'theme_location' => '_no_such_location',
+                    'theme_location' => 'footer-nav-3',
                     'menu' => 'Footer Navigation 3',
                     'container' => '',
                     'container_id' => '',
@@ -125,7 +128,7 @@
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' . esc_html($footer_nav_3->name) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . $footer_nav_3_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_3_args);
@@ -161,8 +164,8 @@
             Looking for our government websites? 
             <?php 
               $site_link = get_field('government_sites', 'option');
-              for($s = 0; $s < count($site_link; $s++)): ?>
-                <a href="<?php echo $site_link['site_link']['url']; ?>" target="<?php echo $site_link['site_link']['target']; ?>"><?php echo $site_link['site_link']['title']; ?></a>
+              for($s = 0; $s < count($site_link); $s++): ?>
+                <a href="<?php echo $site_link[$s]['site_link']['url']; ?>" target="<?php echo $site_link[$s]['site_link']['target']; ?>"><?php echo $site_link[$s]['site_link']['title']; ?></a>
                 <?php if($s !== count($site_link) - 1){ echo ' &nbsp;|&nbsp; '; } ?>
             <?php endfor; ?>
           <?php endif; ?>
