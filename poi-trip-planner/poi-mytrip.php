@@ -35,8 +35,8 @@ else if(isset($_COOKIE['poi_ids'])){
 <?php if(!empty($poi_ids)): ?>
   <section id="mytrip-listings">
     <div class="container">
-      <a href="#my-trip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="my-trip-map">Open Map</a>
-      <div id="my-trip-map" class="collapse">
+      <a href="#mytrip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">Open Map</a>
+      <div id="mytrip-map" class="collapse poi-map">
 
       </div>
       <h3>Listings</h3>
