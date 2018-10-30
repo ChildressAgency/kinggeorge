@@ -315,3 +315,32 @@ function kinggeorge_widgets_init(){
     'after_title' => '</h3>'
   ));
 }
+
+add_action('init', 'kinggeorge_change_post_object_labels');
+function kinggeorge_change_post_object_labels(){
+  global $wp_post_types;
+  $labels = &$wp_post_types['post']->labels;
+  $labels->name = 'Spotlight Articles';
+  $labels->singular_name = 'Spotlight Article';
+  $labels->add_new = 'Add New Spotlight Article';
+  $labels->add_new_item = 'Add New Spotlight Article';
+  $labels->edit_item = 'Edit Spotlight Article';
+  $labels->new_item = 'New Spotlight Article';
+  $labels->view_item = 'View Spotlight Article';
+  $labels->search_items = 'Search Spotlight Articles';
+  $labels->not_found = 'No Spotlight Articles found';
+  $labels->not_found_in_trash = 'No Spotlight Articles found in Trash';
+  $labels->all_items = 'All Spotlight Articles';
+  $labels->menu_name = 'Spotlight';
+  $labels->name_admin_bar = 'Spotlight';
+}
+
+add_action('admin_menu', 'kinggeorge_change_post_labels');
+function kinggeorge_change_post_labels(){
+  global $menu;
+  global $submenu;
+  $menu[5][0] = 'Spotlight';
+  $submenu['edit.php'][5][0] = 'Spotlight';
+  $submenu['edit.php'][10][0] = 'New Spotlight Article';
+  $submenu['edit.php'][16][0] = 'Spotlight Tags';
+}
