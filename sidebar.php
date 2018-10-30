@@ -15,7 +15,7 @@
   <section class="sidebar-section">
     <h3>Archives</h3>
     <ul>
-      <?php wp_get_archives('type' => 'monthly'); ?>
+      <?php wp_get_archives(array('type' => 'monthly')); ?>
     </ul>
   </section>
 
