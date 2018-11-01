@@ -37,7 +37,9 @@ else if(isset($_COOKIE['poi_ids'])){
     <div class="container">
       <a href="#mytrip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">Open Map</a>
       <div id="mytrip-map" class="collapse">
+        <div class="poi-map">
 
+        </div>
       </div>
       <h3>Listings</h3>
       <div class="row">
@@ -63,7 +65,9 @@ else if(isset($_COOKIE['poi_ids'])){
                   <img src="<?php echo $poi_image; ?>" class="img-responsive center-block" alt="" />
                   <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                   <p><?php the_field('street_address'); ?>, <?php the_field('city_state_zip'); ?></p>
-                  <a href="#" class="trip-link remove-trip">Remove From Trip</a>
+                  <div class="add-remove-trip">
+                    <a href="#" class="trip-link remove-trip remove-from-trip">Remove From Trip</a>
+                  </div>
                   <a href="#" class="trip-link view-map">View on Map</a>
                 </div>
               </div>
