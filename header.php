@@ -92,10 +92,20 @@
         $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="Spotlight" />';
       }
       elseif(is_tax('poi_types') || has_term('', 'poi_types')){
-        $current_term_id = get_queried_object()->term_id;
+        $queried_term = get_the_terms(get_the_ID(), 'poi_types');
+        //var_dump($queried_term);
+        $current_term_id = $queried_term[0]->term_id;
         $current_term = get_term($current_term_id, 'poi_types');
+        
         //either show the current term or parent if it has one
-        $hero_caption = '<h1>' . ($term->parent == 0) ? $current_term : get_term($current_term->parent, 'poi_types') . '</h1>';
+        if($current_term->parent == 0){
+          $term_name = $current_term->name;
+        }
+        else{
+          $term_parent = get_term($current_term->parent, 'poi_types');
+          $term_name = $term_parent->name;
+        }
+        $hero_caption = '<h1>' . $term_name . '</h1>';
       }
       elseif(get_field('hero_caption')){
         $hero_caption = '<h1>' . get_field('hero_caption') . '</h1>';
