@@ -34,9 +34,9 @@
           </div>
         <?php endif; ?>
 
-      <?php if(get_field('featured_poi_categories_content')): ?>
+      <?php if(get_field('featured_poi_types_content')): ?>
         <article>
-          <?php the_field('featured_poi_categories_content'); ?>
+          <?php the_field('featured_poi_types_content'); ?>
         </article>
       <?php endif; ?>
     </div>
