@@ -10,7 +10,8 @@
 
 if(!defined('ABSPATH')){ exit; }
 
-define('POI_PLUGIN_DIR', plugin_dir_url(__FILE__));
+define('POI_PLUGIN_DIR', dirname(__FILE__));
+define('POI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 class poi_trip_planner{
   public function __construct(){
@@ -118,25 +119,25 @@ class poi_trip_planner{
     );
     wp_enqueue_script(
       'prettyPhoto-js',
-      POI_PLUGIN_DIR . '/prettyPhoto/js/jquery.prettyPhoto.js',
+      POI_PLUGIN_URL . '/prettyPhoto/js/jquery.prettyPhoto.js',
       array('jquery'),
       null,
       true
     );
     wp_enqueue_style(
       'prettyPhoto-css',
-      POI_PLUGIN_DIR . '/prettyPhoto/css/prettyPhoto.css'
+      POI_PLUGIN_URL . '/prettyPhoto/css/prettyPhoto.css'
     );
     wp_enqueue_script(
       'js-cookie',
-      POI_PLUGIN_DIR . '/js/js-cookie.js',
+      POI_PLUGIN_URL . '/js/js-cookie.js',
       array('jquery'),
       null,
       true
     );
     wp_enqueue_script(
       'poi-scripts.js',
-      POI_PLUGIN_DIR . '/js/poi-scripts.js',
+      POI_PLUGIN_URL . '/js/poi-scripts.js',
       array('jquery'),
       null,
       true
@@ -152,7 +153,7 @@ class poi_trip_planner{
   }
 
   function set_poi_types_template($template){
-    if(is_tax('poi_types') && !is_cust_template($template)){
+    if(is_tax('poi_types') && !$this->is_cust_template($template)){
       $template = POI_PLUGIN_DIR . '/templates/taxonomy-poi_types.php';
     }
 
@@ -173,7 +174,7 @@ class poi_trip_planner{
     global $post;
 
     if($post->post_type == 'poi'){
-      $single_template = POI_PLUGIN_DIR . '/templates/poi_template.php';
+      $single_template = POI_PLUGIN_DIR . '/templates/poi-template.php';
     }
 
     return $single_template;
@@ -232,8 +233,8 @@ class poi_trip_planner{
           'label' => 'Location',
           'name' => 'location',
           'type' => 'google_map',
-          'center_lat' => '38.264493',
-          'center_lng' => '-77.2198848'
+          'center_lat' => '38.267451',
+          'center_lng' => '-77.180927'
         ),
         array(
           'key' => 'field_8',
