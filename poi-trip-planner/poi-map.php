@@ -1,6 +1,7 @@
 <?php
 if(!defined('ABSPATH')){ exit; } ?>
 
+<section id="pois">
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-5 col-md-4">
@@ -15,7 +16,7 @@ if(!defined('ABSPATH')){ exit; } ?>
             if(!empty($poi_types)):
               foreach($poi_types as $poi_type):
                 $pois = new WP_Query(array(
-                  'post_type' => 'pois',
+                  'post_type' => 'poi',
                   'posts_per_page' => -1,
                   'tax_query' => array(
                     array(
@@ -32,8 +33,17 @@ if(!defined('ABSPATH')){ exit; } ?>
                     <ul class="dropdown-menu">
                       <?php while($pois->have_posts()): $pois->the_post(); ?>
                         <li>
-                          <?php $location = get_field('location'); ?>
-                          <a href="<?php the_permalink(); ?>" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>">
+                          <?php 
+                            $poi_lat = '';
+                            $poi_lng = '';
+                            $location = get_field('location'); 
+                            if(!empty($location)){
+                              $poi_lat = $location['lat'];
+                              $poi_lng = $location['lng'];
+                            }
+                            $website = get_field('website');
+                          ?>
+                          <a href="<?php the_permalink(); ?>" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url($website['url']); ?>" data-poi_lat="<?php echo $poi_lat; ?>" data-poi_lng="<?php echo $poi_lng; ?>">
                             <?php the_title(); ?>
                           </a>
                         </li>
@@ -53,3 +63,4 @@ if(!defined('ABSPATH')){ exit; } ?>
     </div>
   </div>
 </div>
+</section>
