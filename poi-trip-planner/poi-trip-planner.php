@@ -119,25 +119,25 @@ class poi_trip_planner{
     );
     wp_enqueue_script(
       'prettyPhoto-js',
-      POI_PLUGIN_URL . '/prettyPhoto/js/jquery.prettyPhoto.js',
+      POI_PLUGIN_URL . 'prettyPhoto/js/jquery.prettyPhoto.js',
       array('jquery'),
       null,
       true
     );
     wp_enqueue_style(
       'prettyPhoto-css',
-      POI_PLUGIN_URL . '/prettyPhoto/css/prettyPhoto.css'
+      POI_PLUGIN_URL . 'prettyPhoto/css/prettyPhoto.css'
     );
     wp_enqueue_script(
       'js-cookie',
-      POI_PLUGIN_URL . '/js/js-cookie.js',
+      POI_PLUGIN_URL . 'js/js-cookie.js',
       array('jquery'),
       null,
       true
     );
     wp_enqueue_script(
       'poi-scripts.js',
-      POI_PLUGIN_URL . '/js/poi-scripts.js',
+      POI_PLUGIN_URL . 'js/poi-scripts.js',
       array('jquery'),
       null,
       true
