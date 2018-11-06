@@ -20,7 +20,7 @@ get_header(); ?>
                 'menu_id' => '',
                 'echo' => true,
                 'fallback_cb' => false,
-                'items_wrap' => '<ul id="%1$s" class=%2$s">%3$s</ul>',
+                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                 'depth' => 1
               );
               wp_nav_menu($history_nav_args);
