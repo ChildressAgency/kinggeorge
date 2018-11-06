@@ -25,7 +25,7 @@ else if(isset($_COOKIE['poi_ids'])){
   <div class="container">
     <h3>Share Your Trip:</h3>
     <?php if(!empty($poi_ids)): ?>
-      <input type="text" class="share-link" value="<?php echo esc_url(add_query_arg(array('poi_ids' => implode(',', $poi_ids)), home_url())); ?>" />
+      <input type="text" class="share-link" value="<?php echo esc_url(add_query_arg(array('poi_ids' => implode(',', $poi_ids)), home_url('poi_ids'))); ?>" />
     <?php else: ?>
       <input type="text" class="share-link" value="You haven't added any destinations." />
     <?php endif; ?>
@@ -68,7 +68,7 @@ else if(isset($_COOKIE['poi_ids'])){
                   <div class="add-remove-trip">
                     <a href="#" class="trip-link remove-trip remove-from-trip">Remove From Trip</a>
                   </div>
-                  <a href="#" class="trip-link view-map">View on Map</a>
+                  <a href="#mytrip-map" class="trip-link view-map" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">View on Map</a>
                 </div>
               </div>
           <?php endwhile; endif; ?>
