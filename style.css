@@ -463,7 +463,7 @@ a{
   padding-right:0;
 }
 #poi-nav{
-  height:660px;
+  height:700px;
   background-color:#0083ca;
   padding:15px;
 }
@@ -474,10 +474,16 @@ a{
   font-weight:900;
   letter-spacing: 2px;
   display:block;
-  padding:5px;
+  padding:10px 40px 10px 0px;
+  position:relative;
+  line-height:1em;
 }
 #poi-nav ul>li.dropdown>a>.fas{
-  float:right;
+  /*float:right;*/
+  position:absolute;
+  right:0;
+  top:50%;
+  margin-top:-12px;
   transition:all .3s ease;
 }
 #poi-nav ul>li.dropdown>a:hover,
@@ -513,7 +519,7 @@ a{
 }
 #poi-map{
   width:100%;
-  height:660px;
+  height:700px;
 }
 #poi-map img{
   max-width:inherit !important;
@@ -687,8 +693,8 @@ a{
   left:0;
 }
 
-#mytrip-map{
-  height:600px;
+#mytrip-map .poi-map{
+  height:700px;
 }
 
 .poi header>.page-header{
@@ -799,7 +805,9 @@ a{
   text-decoration:none;
 }
 #history-nav ul>li.active,
-#history-nav ul>li.active>a{
+#history-nav ul>li.active>a,
+#history-nav ul>li.current-menu-item,
+#history-nav ul>li.current-menu-item>a{
   font-size:20px;
   font-weight:700;
   color:#000;
