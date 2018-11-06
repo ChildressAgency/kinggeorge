@@ -867,6 +867,13 @@ a{
   color:#000;
 }
 
+.gallery a{
+  float:left;
+  margin:5px;
+  width:80px;
+  height:auto;
+}
+
 
 @media (max-width:767px){
   .header-logo{
