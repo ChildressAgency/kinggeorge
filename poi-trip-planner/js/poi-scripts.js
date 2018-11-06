@@ -93,6 +93,10 @@ jQuery(document).ready(function($){
       }
     }
   });
+
+  $('.gallery>a[rel^="prettyPhoto"]').prettyPhoto({
+    social_tools: ''
+  });
 });
 
 function update_my_trip_counter(){

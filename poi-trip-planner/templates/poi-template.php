@@ -28,7 +28,13 @@
             <div class="gallery">
               <?php 
                 $images = get_field('gallery');
-                echo '<img src="' . $images[0]['url'] . '" class="img-responsive center-block" alt="' . $images[0]['alt'] . '" />';
+                if(has_post_thumbnail()){
+                  $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                }
+                else{
+                  $featured_image = $images[0]['url'];
+                }
+                echo '<img src="' . $featured_image . '" class="img-responsive center-block" alt="' . get_the_title() . '" />';
                 foreach($images as $image): ?>
                   <a href="<?php echo $image['url']; ?>" rel="prettyPhoto[poi_gallery]" title="<?php echo $image['caption']; ?>">
                     <img src="<?php echo $image['sizes']['thumbnail']; ?>" class="img-responsive center-block" alt="<?php echo $image['alt']; ?>" />
