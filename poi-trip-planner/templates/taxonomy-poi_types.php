@@ -8,10 +8,16 @@
         <div class="col-sm-4 col-md-3">
           <?php 
             if(has_post_thumbnail()){
-              $poi_image = get_the_post_thumbnail_url($poi, 'thumbnail');
+              $poi_image = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
             }
             else{
-              $poi_image = get_field('default_poi_image', 'option');
+              if(get_field('poi_type_image', 'poi_types_' . $poi_type->term_id)){
+                $category_image = get_field('poi_type_image', 'poi_types_' . $poi_type->term_id);
+                $poi_image = $category_image['url'];
+              }
+              else{
+                $poi_image = get_field('default_poi_image', 'option');
+              }
             }
           ?>
           <a href="<?php the_permalink(); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
