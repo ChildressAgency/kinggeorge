@@ -107,6 +107,11 @@
         }
         $hero_caption = '<h1>' . $term_name . '</h1>';
       }
+      elseif(is_post_type_archive('tribe_events') || is_singular('tribe_events')){
+        $events_page = get_page_by_path('events');
+        $events_page_id = $events_page->ID;
+        $hero_caption = '<h1>' . get_field('hero_caption', 598) . '</h1>';
+      }
       elseif(get_field('hero_caption')){
         $hero_caption = '<h1>' . get_field('hero_caption') . '</h1>';
       }
