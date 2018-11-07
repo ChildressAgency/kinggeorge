@@ -24,7 +24,7 @@ else if(isset($_COOKIE['poi_ids'])){
 <section id="mytrip-share-link">
   <div class="container">
     <h3>Share Your Trip:</h3>
-    <?php if(!empty($poi_ids)): ?>
+    <?php if(!empty($poi_ids) && $poi_ids[0] != 0): ?>
       <input type="text" class="share-link" value="<?php echo esc_url(add_query_arg(array('poi_ids' => implode(',', $poi_ids)), home_url('poi_ids'))); ?>" />
     <?php else: ?>
       <input type="text" class="share-link" value="You haven't added any destinations." />
@@ -32,7 +32,7 @@ else if(isset($_COOKIE['poi_ids'])){
   </div>
 </section>
 
-<?php if(!empty($poi_ids)): ?>
+<?php if(!empty($poi_ids) && $poi_ids[0] != 0): ?>
   <section id="mytrip-listings">
     <div class="container">
       <a href="#mytrip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">Open Map</a>
@@ -50,7 +50,8 @@ else if(isset($_COOKIE['poi_ids'])){
               'p' => $poi_id
             ));
             
-            if($poi->have_posts()): while($poi->have_posts()): $poi->the_post(); ?>
+            if($poi->have_posts()): $p = 0; while($poi->have_posts()): $poi->the_post(); ?>
+              <?php if($p % 3 == 0){ echo '<div class="clearfix"></div>'; } ?>
               <div class="col-sm-4">
                 <?php $location = get_field('location'); ?>
                 <div class="mytrip-listing" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>">
@@ -66,12 +67,12 @@ else if(isset($_COOKIE['poi_ids'])){
                   <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                   <p><?php the_field('street_address'); ?>, <?php the_field('city_state_zip'); ?></p>
                   <div class="add-remove-trip">
-                    <a href="#" class="trip-link remove-trip remove-from-trip">Remove From Trip</a>
+                    <a href="#" class="trip-link remove-trip remove-from-trip" data-poi_id="<?php echo get_the_ID(); ?>">Remove From Trip</a>
                   </div>
                   <a href="#mytrip-map" class="trip-link view-map" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">View on Map</a>
                 </div>
               </div>
-          <?php endwhile; endif; ?>
+          <?php $p++; endwhile; endif; ?>
         <?php endforeach; ?>
       </div>
     </div>
