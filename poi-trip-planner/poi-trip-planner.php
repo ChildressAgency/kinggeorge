@@ -115,18 +115,21 @@ class poi_trip_planner{
   function enqueue_scripts(){
     wp_enqueue_script(
       'google_map_api',
-      '//maps.googleapis.com/maps/api/js?key=' . get_field('google_api_key', 'option')
+      '//maps.googleapis.com/maps/api/js?key=' . get_field('google_api_key', 'option'),
+      array('jquery'),
+      null,
+      true
     );
     wp_enqueue_script(
-      'prettyPhoto-js',
-      POI_PLUGIN_URL . 'prettyPhoto/js/jquery.prettyPhoto.js',
+      'magnific-js',
+      POI_PLUGIN_URL . 'magnific/magnific.min.js',
       array('jquery'),
       null,
       true
     );
     wp_enqueue_style(
-      'prettyPhoto-css',
-      POI_PLUGIN_URL . 'prettyPhoto/css/prettyPhoto.css'
+      'magnific-css',
+      POI_PLUGIN_URL . 'magnific/magnific.css'
     );
     wp_enqueue_script(
       'js-cookie',
@@ -136,11 +139,16 @@ class poi_trip_planner{
       true
     );
     wp_enqueue_script(
-      'poi-scripts.js',
+      'poi-scripts-js',
       POI_PLUGIN_URL . 'js/poi-scripts.js',
       array('jquery'),
       null,
       true
+    );
+    wp_localize_script(
+      'poi-scripts-js',
+      'mapMarker',
+      POI_PLUGIN_URL . 'images/map-marker2.png'
     );
   }
 
@@ -300,7 +308,7 @@ class poi_trip_planner{
           'label' => 'POI Type Image',
           'name' => 'poi_type_image',
           'type' => 'image',
-          'return_type' => 'array',
+          'return_format' => 'array',
           'preview_size' => 'full'
         )
       ),
