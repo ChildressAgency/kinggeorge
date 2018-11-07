@@ -170,6 +170,7 @@
             <?php endfor; ?>
           <?php endif; ?>
         </p>
+        <p class="created-by">Website created by <a href="https://childressagency.com" target="_blank">The Childress Agency</a></p>
       </div>
     </div>
   </footer>
