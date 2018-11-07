@@ -3,7 +3,7 @@
     <div class="col-sm-4">
       <?php
         if(has_post_thumbnail()){
-          $post_image = get_the_post_thumbnail('thumbnail', array('class' => 'img-responsive center-block'));
+          $post_image = get_the_post_thumbnail(get_the_ID(), 'thumbnail', array('class' => 'img-responsive center-block'));
         }
         else{
           $post_image = '<img src="' . get_field('default_spotlight_image', 'option') . '" class="img-responsive center-block" alt="" />';
