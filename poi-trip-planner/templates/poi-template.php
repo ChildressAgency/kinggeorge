@@ -36,7 +36,7 @@
                 }
                 echo '<img src="' . $featured_image . '" class="img-responsive center-block" alt="' . get_the_title() . '" />';
                 foreach($images as $image): ?>
-                  <a href="<?php echo $image['url']; ?>" rel="prettyPhoto[poi_gallery]" title="<?php echo $image['caption']; ?>">
+                  <a href="<?php echo $image['url']; ?>" class="gallery-image" title="<?php echo $image['caption']; ?>">
                     <img src="<?php echo $image['sizes']['thumbnail']; ?>" class="img-responsive center-block" alt="<?php echo $image['alt']; ?>" />
                   </a>
               <?php endforeach; ?>
