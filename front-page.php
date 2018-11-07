@@ -13,8 +13,8 @@
               <div class="col-sm-3">
                 <?php 
                   $poi_image = get_field('default_poi_image', 'option'); 
-                  if(get_field('poi_type_image')){
-                    $category_image = get_field('poi_type_image', 'poi_type_' . $poi_id);
+                  if(get_field('poi_type_image', 'poi_types_' . $poi_id)){
+                    $category_image = get_field('poi_type_image', 'poi_types_' . $poi_id);
                     $poi_image = $category_image['url'];
                   }
 
