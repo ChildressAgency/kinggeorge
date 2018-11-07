@@ -83,7 +83,7 @@ jQuery(document).ready(function($){
       var savedPois = savedPois_cookie.split(',').map(Number);
 
       var poiIdIndex = savedPois.indexOf(poiId);
-
+console.log(poiIdIndex);
       if(poiIdIndex > -1){
         savedPois.splice(poiIdIndex, 1);
         poiIds = savedPois.toString();
@@ -94,8 +94,26 @@ jQuery(document).ready(function($){
     }
   });
 
-  $('.gallery>a[rel^="prettyPhoto"]').prettyPhoto({
+  /*$('.gallery>a[rel^="prettyPhoto"]').prettyPhoto({
     social_tools: ''
+  });*/
+
+  $('.gallery').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    image: {
+      titleSrc: 'title'
+    },
+    gallery: {
+      enabled: true,
+      preload: [0,1],
+      navigateByImgClick: true
+    },
+    zoom: {
+      enabled: true,
+      duration: 300,
+      easing: 'ease-in-out'
+    }
   });
 });
 
@@ -141,6 +159,7 @@ function new_map($el) {
   //add default marker
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng('38.267451', '-77.180927'),
+    icon: mapMarker,
     map: map
   });
   markers.push(marker);
@@ -176,6 +195,7 @@ function add_markers(pois, map){
 
       var marker = new google.maps.Marker({
         position: latlng,
+        icon: mapMarker,
         map: map
       });
 
