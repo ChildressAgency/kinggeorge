@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   Template Name: History Page
   Description: Template for the history pages with nav menu on left.
