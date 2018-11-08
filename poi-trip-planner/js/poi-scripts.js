@@ -12,13 +12,16 @@ jQuery(document).ready(function($){
     
     $poiItems.each(function(index){
       //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
+
+      var $markerLink = $(this).find('a');
   
       var markers = [];
-      markers['title'] = $(this).find('a').data('poi_title');
-      markers['description'] = $(this).find('a').data('poi_description');
-      markers['website'] = $(this).find('a').data('poi_website');
-      markers['lat'] = $(this).find('a').data('poi_lat');
-      markers['lng'] = $(this).find('a').data('poi_lng');
+      markers['title'] = $markerLink.data('poi_title');
+      markers['description'] = $markerLink.data('poi_description');
+      markers['poi_page'] = $markerLink.data('poi_page');
+      markers['website'] = $markerLink.data('poi_website');
+      markers['lat'] = $markerLink.data('poi_lat');
+      markers['lng'] = $markerLink.data('poi_lng');
 
       pois.push(markers);
     });
@@ -30,12 +33,14 @@ jQuery(document).ready(function($){
   $('#mytrip-map').on('shown.bs.collapse', function(){
     var pois = [];
     $('.mytrip-listing').each(function(index){
+      var $markerLink = $(this);
       var markers = [];
-      markers['title'] = $(this).data('poi_title');
-      markers['description'] = $(this).data('poi_description');
-      markers['website'] = $(this).data('poi_website');
-      markers['lat'] = $(this).data('poi_lat');
-      markers['lng'] = $(this).data('poi_lng');
+      markers['title'] = $markerLink.data('poi_title');
+      markers['description'] = $markerLink.data('poi_description');
+      markers['poi_page'] = $markerLink.data('poi_page');
+      markers['website'] = $markerLink.data('poi_website');
+      markers['lat'] = $markerLink.data('poi_lat');
+      markers['lng'] = $markerLink.data('poi_lng');
 
       pois.push(markers);
     });
@@ -115,6 +120,20 @@ console.log(poiIdIndex);
       easing: 'ease-in-out'
     }
   });
+
+  $('.marker-link').on('click', function(e){
+    e.preventDefault();
+    var markerTitle = $(this).data('poi_title');
+
+    var markerToOpen;
+    for(var m = 0; m < markers.length; m++){
+      if(markers[m].title == markerTitle){
+        markerToOpen = markers[m];
+      }
+    }
+
+    new google.maps.event.trigger(markerToOpen, 'click');
+  });
 });
 
 function update_my_trip_counter(){
@@ -191,11 +210,13 @@ function add_markers(pois, map){
       
       infoWindowContent += '<h4>' + poi.title + '</h4>';
       infoWindowContent += '<p>' + poi.description + '</p>';
+      infoWindowContent += '<a href="' + poi.poi_page + '" style="margin-right:20px;">More Info</a>';
       infoWindowContent += '<a href="' + poi.website + '" target="_blank">Visit Website</a>';
 
       var marker = new google.maps.Marker({
         position: latlng,
         icon: mapMarker,
+        title: poi.title,
         map: map
       });
 

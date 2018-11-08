@@ -43,7 +43,7 @@ if(!defined('ABSPATH')){ exit; } ?>
                             }
                             $website = get_field('website');
                           ?>
-                          <a href="<?php the_permalink(); ?>" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url($website['url']); ?>" data-poi_lat="<?php echo $poi_lat; ?>" data-poi_lng="<?php echo $poi_lng; ?>">
+                          <a href="#" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_page="<?php echo get_permalink(); ?>" data-poi_website="<?php echo esc_url($website['url']); ?>" data-poi_lat="<?php echo $poi_lat; ?>" data-poi_lng="<?php echo $poi_lng; ?>" class="marker-link">
                             <?php the_title(); ?>
                           </a>
                         </li>
