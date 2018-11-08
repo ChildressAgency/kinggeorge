@@ -5,10 +5,10 @@ jQuery(document).ready(function($){
   }
 
   //when user clicks a dropdown, add markers to map
-  $('#poi-nav').on('shown.bs.dropdown', function(){
+  $('#poi-nav').on('shown.bs.collapse', function(){
     //var pois = {'markers':[]};
     var pois = [];
-    var $poiItems = $(this).find('.open>.dropdown-menu>li');
+    var $poiItems = $(this).find('.collapse.in .list-group-item');
     
     $poiItems.each(function(index){
       //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple

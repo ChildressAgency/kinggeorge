@@ -463,22 +463,34 @@ a{
   padding-right:0;
 }
 #poi-nav{
-  height:700px;
+  min-height:700px;
   background-color:#0083ca;
-  padding:15px;
+  padding:5px 10px 5px 5px;
 }
-#poi-nav ul>li.dropdown>a{
+#poi-nav .panel{
+  background-color:transparent;
+  box-shadow:none;
+  border:none;
+  margin-bottom:15px;
+}
+#poi-nav .panel-default>.panel-heading{
+  background-color:transparent;
+  color:#000;
+  border:none;
+  padding:0;
+}
+#poi-nav .panel-title>a{
   font-size:24px;
   color:#000;
   text-transform:uppercase;
   font-weight:900;
   letter-spacing: 2px;
   display:block;
-  padding:10px 40px 10px 0px;
+  padding:10px 40px 10px 10px;
   position:relative;
   line-height:1em;
 }
-#poi-nav ul>li.dropdown>a>.fas{
+#poi-nav .panel-title>a>.fas{
   /*float:right;*/
   position:absolute;
   right:0;
@@ -486,40 +498,45 @@ a{
   margin-top:-12px;
   transition:all .3s ease;
 }
-#poi-nav ul>li.dropdown>a:hover,
-#poi-nav ul>li.dropdown>a:focus{
+#poi-nav .panel-title>a.collapsed>.fas{
+  transform:rotateX(180deg);
+}
+#poi-nav .panel-title>a:hover,
+#poi-nav .panel-title>a:focus{
   text-decoration:none;
   color:#000;
   background-color:rgba(255,255,255,.2);
 }
-#poi-nav ul>li.dropdown.open>a>.fas{
-  transform:rotateX(180deg);
+#poi-nav .panel-title>a>.fas{
+  transform:none;
 }
-#poi-nav .dropdown-backdrop{
-  display:none;
-}
-#poi-nav .dropdown-menu{
-  position:static;
-  float:none;
-  width:auto;
+#poi-nav .list-group{
   background-color:transparent;
   border:none;
   box-shadow:none;
-  max-height:275px;
+  max-height:255px;
   overflow-y:auto;
+  padding-left:15px;
 }
-#poi-nav .dropdown-menu>li>a{
-  padding:5px;
+#poi-nav .list-group-item{
+  background-color:transparent;
+  border:none;
+  padding:0;
+}
+#poi-nav .list-group>.list-group-item>a{
   font-size:20px;
   color:#000;
+  padding:5px;
+  display:block;
 }
-#poi-nav .dropdown-menu>li>a:hover,
-#poi-nav .dropdown-menu>li>a:focus{
+#poi-nav .list-group>.list-group-item>a:hover,
+#poi-nav .list-group>.list-group-item>a:focus{
   background-color:rgba(255,255,255,.2);
+  text-decoration:none;
 }
 #poi-map{
   width:100%;
-  height:700px;
+  min-height:700px;
 }
 #poi-map img{
   max-width:inherit !important;

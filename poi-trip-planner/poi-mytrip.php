@@ -44,13 +44,14 @@ else if(isset($_COOKIE['poi_ids'])){
       <h3>Listings</h3>
       <div class="row">
         <?php
+          $p = 0;
           foreach($poi_ids as $poi_id):
             $poi = new WP_Query(array(
               'post_type' => 'poi',
               'p' => $poi_id
             ));
             
-            if($poi->have_posts()): $p = 0; while($poi->have_posts()): $poi->the_post(); ?>
+            if($poi->have_posts()): while($poi->have_posts()): $poi->the_post(); ?>
               <?php if($p % 3 == 0){ echo '<div class="clearfix"></div>'; } ?>
               <div class="col-sm-4">
                 <?php $location = get_field('location'); ?>
@@ -69,11 +70,11 @@ else if(isset($_COOKIE['poi_ids'])){
                   <div class="add-remove-trip">
                     <a href="#" class="trip-link remove-trip remove-from-trip" data-poi_id="<?php echo get_the_ID(); ?>">Remove From Trip</a>
                   </div>
-                  <a href="#mytrip-map" class="trip-link view-map" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">View on Map</a>
+                  <a href="#mytrip-map" class="trip-link view-map" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map" data-poi_title="<?php echo get_the_title(); ?>">View on Map</a>
                 </div>
               </div>
-          <?php $p++; endwhile; endif; ?>
-        <?php endforeach; ?>
+          <?php endwhile; endif; ?>
+        <?php $p++; endforeach; ?>
       </div>
     </div>
   </section>
