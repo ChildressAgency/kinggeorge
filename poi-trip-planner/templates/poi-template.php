@@ -12,6 +12,10 @@
                 <p class="poi-address"><?php the_field('street_address'); ?> <?php the_field('city_state_zip'); ?></p>
                 <p class="poi-phone"><?php the_field('phone'); ?></p>
                 <p class="poi-email"><?php the_field('email'); ?></p>
+                <?php $poi_website = get_field('website'); ?>
+                <p class="poi-website">
+                  <a href="<?php echo $poi_website['url']; ?>" target="_blank"><?php echo $poi_website['title']; ?></a>
+                </p>
               </header>
               <div class="add-remove-trip">
                 <a href="#" class="btn-main btn-rounded add-to-trip" data-poi_id="<?php echo get_the_ID(); ?>">+ Add to Trip</a>
