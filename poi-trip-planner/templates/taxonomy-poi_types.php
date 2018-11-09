@@ -4,7 +4,24 @@
     <?php $poi_type = get_queried_object(); ?>
     <h2 class="page-header"><?php the_field('poi_type_page_header', $poi_type); ?></h2>
     <div class="row">
-      <?php if(have_posts()): while(have_posts()): the_post(); ?>
+      <?php
+        $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
+        $pois = new WP_Query(array(
+          'post_type' => 'poi',
+          'posts_per_page' => 12,
+          'post_status' => 'publish',
+          'paged' => $paged,
+          'orderby' => 'post_title',
+          'order' => 'ASC',
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'poi_types',
+              'field' => 'term_id',
+              'terms' => $poi_type->term_id
+            )
+          )
+        ));
+        if($pois->have_posts()): while($pois->have_posts()): $pois->the_post(); ?>
         <div class="col-sm-4 col-md-3">
           <?php 
             if(has_post_thumbnail()){
@@ -28,6 +45,20 @@
           </a>
         </div>
       <?php endwhile; endif; ?>
+    </div>
+    <div class="poi-pagination">
+      <?php
+        //https://codex.wordpress.org/Function_Reference/paginate_links
+        $big = 999999999;
+        echo paginate_links(array(
+          'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+          'format' => '?paged=%#%',
+          'current' => max(1, get_query_var('paged')),
+          'total' => $pois->max_num_pages,
+          'prev_text' => '<',
+          'next_text' => '>'
+        ));
+      ?>
     </div>
   </div>
 </main>
