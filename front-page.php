@@ -76,9 +76,9 @@
           <a href="<?php echo home_url('spotlight'); ?>" class="btn-main">View All</a>
         </div>
       </section>
-  <?php endif; ?>
+  <?php endif; wp_reset_postdata(); ?>
 
-  <section id="pois">
+  <section id="home-pois">
     <header class="poi-header">
       <?php if(get_field('poi_section_title')): ?>
         <h2><?php the_field('poi_section_title'); ?></h2>
