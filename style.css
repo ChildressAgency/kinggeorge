@@ -903,6 +903,39 @@ a{
   font-size:14px;
 }
 
+.poi-pagination{
+  text-align:center;
+  margin-top:40px;
+  font-size:30px;
+}
+.poi-pagination .page-numbers{
+  color:#b3b3b3;
+  margin-left:4px;
+  margin-right:4px;
+}
+.poi-pagination span.page-numbers.current,
+.poi-pagination .page-numbers:hover,
+.poi-pagination .page-numbers:focus{
+  color:#0083ca;
+  font-weight:700;
+  text-decoration:none;
+}
+.poi-pagination .page-numbers.next,
+.poi-pagination .page-numbers.prev{
+  background-color:#b3b3b3;
+  color:#fff;
+  font-weight:700;
+  border-radius:50%;
+  padding:0px 8px 3px;
+  display:inline-block;
+  line-height:1em;
+  transition:all .3s ease;
+}
+.poi-pagination .page-numbers.next:hover,
+.poi-pagination .page-numbers.prev:hover{
+  background-color:#0083ca;
+}
+
 
 @media (max-width:767px){
   .header-logo{
