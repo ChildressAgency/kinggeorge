@@ -55,7 +55,7 @@ else if(isset($_COOKIE['poi_ids'])){
               <?php if($p % 3 == 0){ echo '<div class="clearfix"></div>'; } ?>
               <div class="col-sm-4">
                 <?php $location = get_field('location'); ?>
-                <div class="mytrip-listing" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>">
+                <div class="mytrip-listing">
                   <?php 
                     if(has_post_thumbnail()){
                       $poi_image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
@@ -70,7 +70,7 @@ else if(isset($_COOKIE['poi_ids'])){
                   <div class="add-remove-trip">
                     <a href="#" class="trip-link remove-trip remove-from-trip" data-poi_id="<?php echo get_the_ID(); ?>">Remove From Trip</a>
                   </div>
-                  <a href="#mytrip-map" class="trip-link view-map" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map" data-poi_title="<?php echo get_the_title(); ?>">View on Map</a>
+                  <a href="#mytrip-map" class="trip-link view-map marker-link" role="button" aria-expanded="false" aria-controls="mytrip-map" data-poi_title="<?php echo get_the_title(); ?>" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>">View on Map</a>
                 </div>
               </div>
           <?php endwhile; endif; ?>

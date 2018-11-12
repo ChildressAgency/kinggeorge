@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
   $('#mytrip-map').on('shown.bs.collapse', function(){
     var pois = [];
     $('.mytrip-listing').each(function(index){
-      var $markerLink = $(this);
+      var $markerLink = $(this).find('.view-map');
       var markers = [];
       markers['title'] = $markerLink.data('poi_title');
       markers['description'] = $markerLink.data('poi_description');
@@ -123,6 +123,9 @@ console.log(poiIdIndex);
 
   $('.marker-link').on('click', function(e){
     e.preventDefault();
+    if($('#mytrip-map').length){
+      $('#mytrip-map').collapse('show');
+    }
     var markerTitle = $(this).data('poi_title');
 
     var markerToOpen;
