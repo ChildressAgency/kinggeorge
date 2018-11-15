@@ -34,7 +34,7 @@ class poi_trip_planner{
   //private $google_api_key = get_field('google_api_key', 'option');
 
   function poi_load_textdomain(){
-    load_plugin_textdomain('poi', false, basename(dirname(__FILE__)) . '/languages');
+    load_plugin_textdomain('poi_trip_planner', false, basename(dirname(__FILE__)) . '/languages');
   }
 
   function create_post_types(){
