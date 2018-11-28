@@ -43,6 +43,10 @@
   </section>
 
   <section id="instagram-feed">
+        <div class="instagram-arrows">
+          <span class="instagram_next"></span>
+          <span class="instagram_prev"></span>
+        </div>
     <h2><?php the_field('instagram_feed_section_title'); ?></h2>
     <div class="container">
       <h2 class="instagram-acct-name"><?php the_field('instagram_feed_title'); ?></h2>
@@ -51,7 +55,18 @@
         <a href="<?php the_field('instagram', 'option'); ?>" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
       <?php endif; ?>
       <div class="instagram-feed">
-        <?php echo do_shortcode('[instagram-feed]'); ?>
+        <?php //echo do_shortcode('[instagram-feed]'); ?>
+        <?php
+          $home_page = get_page_by_path('home');
+          $home_page_id = $home_page->ID;
+          $access_token = get_field('instagram_access_token', $home_page_id);
+
+          $url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $access_token;
+          $result = fetch_data($url);
+
+          foreach($result->data as $post): ?>
+            <a href="<?php echo $post->link; ?>" target="_blank"><img src="<?php echo $post->images->low_resolution->url; ?>" /></a>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
