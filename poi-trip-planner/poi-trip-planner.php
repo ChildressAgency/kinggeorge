@@ -58,6 +58,7 @@ class poi_trip_planner{
       'menu_icon' => 'dashicons-location-alt',
       'query_var' => 'poi',
       'has_archive' => false,
+      'show_in_rest' => true,
       'supports' => array(
         'title',
         'editor',
@@ -76,6 +77,7 @@ class poi_trip_planner{
         'hierarchical' => true,
         'show_admin_column' => true,
         'public' => true,
+        'show_in_rest' => true,
         'labels' => array(
           'name' => __('Point of Interest Types', 'poi_trip_planner'),
           'singular_name' => __('Point of Interest Type', 'poi_trip_planner'),
@@ -91,6 +93,30 @@ class poi_trip_planner{
           'add_or_remove_items' => __('Add or Remove Point of Interest Types', 'poi_trip_planner'),
           'not_found' => __('No Point of Interest Types Found', 'poi_trip_planner'),
           'back_to_items' => __('Back to Point of Interest Types', 'poi_trip_planner')
+        )
+      )
+    );
+
+    register_taxonomy('poi_tags',
+      'poi',
+      array(
+        'hierarchical' => false,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'labels' => array(
+          'name' => __('Point of Interest Tags', 'poi_trip_planner'),
+          'singular_name' => __('Point of Interest Tag', 'poi_trip_planner'),
+          'all_items' => __('All Point of Interest Tags', 'poi_trip_planner'),
+          'edit_items' => __('Edit Point of Interest Tags', 'poi_trip_planner'),
+          'view_item' => __('View Point of Interest Tag', 'poi_trip_planner'),
+          'update_item' => __('Update Point of Interest Tag', 'poi_trip_planner'),
+          'add_new_item' => __('Add New Point of Interest Tag', 'poi_trip_planner'),
+          'new_item_name' => __('New Point of Interest Tag Name', 'poi_trip_planner'),
+          'search_items' => __('Search Point of Interest Tags', 'poi_trip_planner'),
+          'popular_items' => __('Popular Point of Interest Tags', 'poi_trip_planner'),
+          'add_or_remove_items' => __('Add or Remove Point of Interest Tags', 'poi_trip_planner'),
+          'not_found' => __('No Point of Interest Tags Found', 'poi_trip_planner'),
+          'back_to_items' => __('Back to Point of Interest Tags', 'poi_trip_planner')
         )
       )
     );
