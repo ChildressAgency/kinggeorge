@@ -67,7 +67,7 @@
   <nav id="header-nav"<?php echo (is_front_page()) ? $home_page_nav_position : $other_page_nav_position; ?>>
     <div class="<?php if(!is_front_page()){ echo 'container-fluid'; } ?>">
       <div class="navbar-header">
-        <a href="<?php echo home_url(); ?>" class="header-logo">King George</a>
+        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo">King George</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
@@ -82,7 +82,7 @@
           </div>
         </div>
         <a href="#" id="search-icon-menu" class="search-icon hidden-xs"></a>
-        <a href="<?php echo home_url('my-trip'); ?>" id="my-trip-icon" data-count="0">My Trip</a>
+        <a href="<?php echo esc_url(home_url('my-trip'); ?>" id="my-trip-icon" data-count="0">My Trip</a>
         <?php
           $header_nav_args = array(
             'theme_location' => 'header-nav',
