@@ -234,6 +234,8 @@ a{
   padding-bottom:8px;
 }
 #header-nav .navbar-nav>li.active>a,
+#header-nav .navbar-nav>li.current-menu-parent>a,
+#header-nav .navbar-nav>li.current-menu-item>a,
 #header-nav .navbar-nav>li>a:hover,
 #header-nav .navbar-nav>li>a:focus{
   color:#fff;
