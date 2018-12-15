@@ -82,8 +82,24 @@ a{
   text-transform:uppercase;
   text-shadow:3px 3px 20px #000;
 }
+#hero-carousel .item{
+  height:395px;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+.hp-hero-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background-color:rgba(0,0,0,.4);
+}
 .affix + #quick-links{
-  padding-top:38px;
+  padding-top:98px;
+}
+.navbar-fixed-top + .hero{
+  margin-top:38px;
 }
 
 #navbar{
@@ -105,6 +121,7 @@ a{
   display:block;
   padding-top:5px;
 }
+/*
 .header-logo::before{
   content:"";
   position:absolute;
@@ -114,7 +131,7 @@ a{
   width:23px;
   left:7px;
   background-position:-30px 0px;
-}
+}*/
 #my-trip-icon{
   float:right;
   padding:8px 45px 8px 15px;

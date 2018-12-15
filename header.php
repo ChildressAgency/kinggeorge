@@ -23,16 +23,49 @@
 
 <body <?php body_class(); ?>>
   <?php if(is_front_page()): ?>
-    <div class="hp-hero" style="background-image:url(<?php the_field('hero_image'); ?>); <?php the_field('hero_image_css'); ?>">
-      <div class="hp-hero-caption">
-        <h1><?php the_field('hero_title'); ?></h1>
-        <h3><?php the_field('hero_subtitle'); ?></h3>
+    <?php 
+      $front_page_id = get_the_ID();
+      $hero_slides = get_post_meta($front_page_id, 'hero_slider', true);
+      if($hero_slides == 1): ?>
+
+        <?php $hero_bg_img_and_css = kinggeorge_get_bg_img_and_css($front_page_id, 'hero_slider_0_slide_image'); ?>
+
+        <div class="hp-hero" style="background-image:url(<?php echo esc_url($hero_bg_img_and_css['image_url']); ?>); <?php echo esc_html($hero_bg_img_and_css['image_css']); ?>">
+          <div class="hp-hero-caption">
+            <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_title', true)); ?></h1>
+            <h3><?php echo esc_html(get_post_meta($front_page_id, 'hero_subtitle', true)); ?></h3>
+          </div>
+        </div>
+
+    <?php else: ?>
+
+      <div id="hero-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <?php for($i = 0; $i < $hero_slides; $i++): ?>
+            
+            <?php $slide_bg_img_and_css = kinggeorge_get_bg_img_and_css($front_page_id, 'hero_slider_' . $i . '_slide_image'); ?>
+            <div class="item<?php if($i == 0){ echo ' active'; } ?>" style="background-image:url(<?php echo esc_url($slide_bg_img_and_css['image_url']); ?>); <?php echo esc_html($slide_bg_img_and_css['image_css']); ?>">
+              <?php if(get_post_meta($front_page_id, 'hero_slider_' . $i . '_darken_image', true) == 1): ?>
+                <div class="hp-hero-overlay"></div>
+              <?php endif; ?>
+            </div>
+          <?php endfor; ?>
+        </div>
+        <div class="hp-hero-caption">
+          <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_title', true)); ?></h1>
+          <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_subtitle', true)); ?></h1>
+        </div>
       </div>
-    </div>
+
+    <?php endif; ?>
   <?php endif; ?>
 
-  <nav id="header-nav"<?php if(is_front_page()){ echo ' data-spy="affix" data-offset-top="395"'; } ?>>
-    <div class="container_fluid">
+  <?php 
+    $home_page_nav_position = ' data-spy="affix" data-offset-top="395"';
+    $other_page_nav_position = ' class="navbar-fixed-top"';
+  ?>
+  <nav id="header-nav"<?php echo (is_front_page()) ? $home_page_nav_position : $other_page_nav_position; ?>>
+    <div class="<?php if(!is_front_page()){ echo 'container-fluid'; } ?>">
       <div class="navbar-header">
         <a href="<?php echo home_url(); ?>" class="header-logo">King George</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
