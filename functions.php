@@ -379,3 +379,15 @@ function fetch_data($url){
 
   return json_decode($result);
 }
+
+function kinggeorge_get_bg_img_and_css($page_id, $img_field){
+	$bg_img_and_css = [];
+
+	$img_id = get_post_meta($page_id, $img_field, true);
+	$img = wp_get_attachment_image_src($img_id, 'full');
+	$bg_img_and_css['image_url'] = $img[0];
+
+	$bg_img_and_css['image_css'] = get_post_meta($page_id, $img_field . '_css', true);
+
+	return $bg_img_and_css;
+}
