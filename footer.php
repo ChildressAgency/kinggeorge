@@ -1,7 +1,7 @@
 <?php if(is_tax('poi_types') || is_singular('poi')): ?>
   <section id="map-link">
     <div class="container">
-      <a href="<?php echo home_url('king-george-map'); ?>" class="btn-main btn-alt btn-rounded">Explore our area through our interactive map ></a>
+      <a href="<?php echo esc_url(home_url('king-george-map')); ?>" class="btn-main btn-alt btn-rounded">Explore on interactive map ></a>
     </div>
   </section>
 <?php endif; ?>
