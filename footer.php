@@ -26,10 +26,14 @@
     <section id="also-like">
       <div class="container">
         <header class="section-header">
-          <?php if(get_field('featured_pois_section_title', 'option')): ?>
-            <h2><?php the_field('featured_pois_section_title', 'option'); ?></h2>
-          <?php endif; if(get_field('featured_pois_section_subtitle', 'option')): ?>
-            <p><?php the_field('featured_pois_section_subtitle', 'option'); ?></p>
+          <?php
+            $featured_pois_section_title = get_option('options_featured_pois_section_title');
+            $featured_pois_section_subtitle = get_option('options_featured_pois_section_subtitle');
+          ?>
+          <?php if($featured_pois_section_title): ?>
+            <h2><?php esc_html_e($featured_pois_section_title); ?></h2>
+          <?php endif; if($featured_pois_section_subtitle): ?>
+            <p><?php esc_html_e($featured_pois_section_subtitle); ?></p>
           <?php endif; ?>
         </header>
 
@@ -37,14 +41,19 @@
           <?php foreach($featured_pois as $poi): ?>
             <div class="col-sm-3">
               <?php
-                $poi_image = get_field('default_poi_image', 'option');
+                //$poi_image = get_field('default_poi_image', 'option');
                 if(has_post_thumbnail($poi)){
-                  $poi_image = get_the_post_thumbnail_url($poi, 'thumbnail');
+                  $poi_image_url = get_the_post_thumbnail_url($poi, 'thumbnail');
+                }
+                else{
+                  $poi_image_id = get_option('options_default_poi_image');
+                  $poi_image = wp_get_attachment_image_src($poi_image_id, 'thumbnail');
+                  $poi_image_url = $poi_image[0];
                 }
               ?>
-              <a href="<?php echo get_permalink($poi); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
+              <a href="<?php echo esc_url(get_permalink($poi)); ?>" class="quick-link" style="background-image:url(<?php echo esc_url($poi_image_url); ?>);">
                 <div class="caption">
-                  <h3><?php echo get_the_title($poi); ?></h3>
+                  <h3><?php echo esc_html(get_the_title($poi)); ?></h3>
                 </div>
                 <div class="quick-link-overlay"></div>
               </a>
@@ -56,29 +65,42 @@
 <?php endif; ?>
 
 <?php if(is_front_page()): ?>
-  <?php if(have_rows('alliances')): ?>
-    <section id="alliances">
-      <div class="container">
-        <header class="section-header">
-          <?php if(get_field('alliances_section_title')): ?>
-            <h2><?php the_field('alliances_section_title'); ?></h2>
-          <?php endif; if(get_field('alliances_section_subtitle')): ?>
-            <p><?php the_field('alliances_section_subtitle'); ?></p>
-          <?php endif; ?>
-        </header>
+  <?php 
+    $alliances = get_post_meta($page_id, 'alliances', true);
+    if(have_rows('alliances')): ?>
+      <section id="alliances">
+        <div class="container">
+          <header class="section-header">
+            <?php
+              $alliances_section_title = get_field('alliances_section_title');
+              $alliances_section_subtitle = get_field('alliances_section_subtitle');
+            ?>
+            <?php if($alliances_section_title): ?>
+              <h2><?php esc_html_e($alliances_section_title); ?></h2>
+            <?php endif; if($alliances_section_subtitle): ?>
+              <p><?php esc_html_e($alliances_section_subtitle); ?></p>
+            <?php endif; ?>
+          </header>
 
-        <ul class="list-unstyled list-inline">
-          <?php while(have_rows('alliances')): the_row(); ?>
-            <li>
-              <a href="<?php the_sub_field('alliance_link'); ?>">
-                <?php $alliance_image = get_sub_field('alliance_image'); ?>
-                <img src="<?php echo $alliance_image['url']; ?>" class="img-responsive center-block" alt="<?php echo $alliance_image['alt']; ?>" />
-              </a>
-            </li>
-          <?php endwhile; ?>
-        </ul>
-      </div>
-    </section>
+          <ul class="list-unstyled list-inline">
+            <?php
+              $page_id = get_the_ID();
+              
+              for($a = 0; $a < $alliances; $a++):
+                $alliance_link = get_post_meta($page_id, 'alliances_' . $a . '_alliance_link', true);
+                $alliance_image_id = get_post_meta($page_id, 'alliances_' . $a . '_alliance_image', true);
+                $alliance_image = wp_get_attachment_image_src($alliance_image_id, 'full');
+                $alliance_image_alt = get_post_meta($alliance_image_id, '_wp_attachment_image_alt', true); ?>
+
+                <li>
+                  <a href="<?php echo esc_url($alliance_link); ?>">
+                    <img src="<?php echo esc_url($alliance_image[0]); ?>" class="img-responsive center-block" alt="<?php echo esc_attr($alliance_image_alt); ?>" />
+                  </a>
+                </li>
+            <?php endfor; ?>
+          </ul>
+        </div>
+      </section>
   <?php endif; ?>
 <?php endif; ?>
 
@@ -153,35 +175,44 @@
         </div>
         <div class="col-sm-4">
           <div class="social">
-            <?php if(get_field('instagram', 'option')): ?>
-              <a href="<?php the_field('instagram', 'option'); ?>" class="instagram text-hide" target="_blank">Instagram<i class="fab fa-instagram"></i></a>
-            <?php endif; if(get_field('twitter', 'option')): ?>
-              <a href="<?php the_field('twitter', 'option'); ?>" class="twitter text-hide" target="_blank">Twitter<i class="fab fa-twitter"></i></a>
-            <?php endif; if(get_field('facebook', 'option')): ?>
-              <a href="<?php the_field('facebook', 'option'); ?>" class="facebook text-hide" target="_blank">Facebook<i class="fab fa-facebook"></i></a>
+            <?php
+              $instagram = get_option('options_instagram');
+              $twitter = get_option('options_twitter');
+              $facebook = get_option('options_facebook');
+            ?>
+            <?php if($instagram): ?>
+                <a href="<?php echo esc_url($instagram); ?>" class="instagram text-hide" target="_blank">Instagram<i class="fab fa-instagram"></i></a>
+            <?php endif; if($twitter): ?>
+              <a href="<?php echo esc_url($twitter); ?>" class="twitter text-hide" target="_blank">Twitter<i class="fab fa-twitter"></i></a>
+            <?php endif; if($facebook): ?>
+              <a href="<?php echo esc_url($facebook); ?>" class="facebook text-hide" target="_blank">Facebook<i class="fab fa-facebook"></i></a>
             <?php endif; ?>
           </div>
           <div itemscope itemtype="//schema.org/Organization" class="contact-info">
-            <p itemprop="name">King George County Department of Economic Development & Tourism</p>
+            <p itemprop="name"><?php esc_html_e(get_option('options_footer_contact_title')); ?></p>
             <address itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-              <span itemprop="streetAddress"><?php the_field('street_address'); ?></span><br /><span itemprop="addressLocality"><?php the_field('city', 'option'); ?></span>, <span itemprop="addressRegion"><?php the_field('state', 'option'); ?></span> <span itemprop="postalCode"><?php the_field('zip', 'option'); ?></span>
+              <span itemprop="streetAddress"><?php esc_html_e(get_option('options_street_address')); ?></span><br /><span itemprop="addressLocality"><?php esc_html_e(get_option('options_city')); ?></span>, <span itemprop="addressRegion"><?php esc_html_e(get_option('options_state')); ?></span> <span itemprop="postalCode"><?php esc_html_e(get_option('options_zip')); ?></span>
             </address>
-            <p itemprop="telephone"><?php the_field('phone', 'option'); ?></p>
+            <p itemprop="telephone"><?php esc_html_e(get_option('options_phone')); ?></p>
           </div>
         </div>
       </div>
     </div>
     <div class="copyright">
       <div class="container">
-        <p>&copy; <?php echo date('Y'); ?> King George Economic Development and Tourism &nbsp;|&nbsp; <a href="<?php echo home_url('privacy-policy'); ?>">Privacy Policy</a> &nbsp;|&nbsp; <a href="<?php echo home_url('list-your-business'); ?>">List your business</a><br />
-          <?php if(have_rows('government_sites', 'option')): ?>
-            Looking for our government websites? 
-            <?php 
-              $site_link = get_field('government_sites', 'option');
-              for($s = 0; $s < count($site_link); $s++): ?>
-                <a href="<?php echo $site_link[$s]['site_link']['url']; ?>" target="<?php echo $site_link[$s]['site_link']['target']; ?>"><?php echo $site_link[$s]['site_link']['title']; ?></a>
-                <?php if($s !== count($site_link) - 1){ echo ' &nbsp;|&nbsp; '; } ?>
-            <?php endfor; ?>
+        <p>&copy; <?php echo date('Y'); ?> <?php esc_html_e(get_option('options_footer_contact_title')); ?> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('privacy-policy')); ?>">Privacy Policy</a> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('list-your-business')); ?>">List your business</a><br />
+          <?php 
+            $site_links = get_option('options_government_sites');
+            if($site_links): ?>
+              Looking for our government websites? 
+              <?php 
+                for($s = 0; $s < $site_links; $s++):
+                  $site_link = get_option('options_government_sites_' . $s . '_site_link'); ?>
+
+                  <a href="<?php echo esc_url($site_link['url']); ?>" target="<?php echo esc_attr($site_link['target']); ?>"><?php echo esc_html($site_link['title']); ?></a>
+                  <?php if($s < count($site_links)){ echo ' &nbsp;|&nbsp; '; } ?>
+
+              <?php endfor; ?>
           <?php endif; ?>
         </p>
         <p class="created-by">Website created by <a href="https://childressagency.com" target="_blank">The Childress Agency</a></p>
