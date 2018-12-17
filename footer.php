@@ -7,7 +7,21 @@
 <?php endif; ?>
 
 <?php 
-  $featured_pois = get_field('featured_points_of_interest', 'option');
+  if(get_field('feature_random_points_of_interest', 'option') == 1){
+    $featured_pois_query = new WP_Query(array(
+      'post_type' => 'poi',
+      'posts_per_page' => 4,
+      'post_status' => 'publish',
+      'orderby' => 'rand',
+      'order' => 'ASC',
+      'field' => 'ids'
+    ));
+
+    $featured_pois = $featured_pois_query->posts;
+  }
+  else{
+    $featured_pois = get_field('featured_points_of_interest', 'option');
+  }
   if($featured_pois): ?>
     <section id="also-like">
       <div class="container">
