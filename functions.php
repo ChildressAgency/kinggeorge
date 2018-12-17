@@ -162,16 +162,24 @@ function kinggeorge_change_post_labels(){
   $submenu['edit.php'][16][0] = 'Spotlight Tags';
 }
 
-function fetch_data($url){
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+function kinggeorge_get_instagram_feed(){
+  $cache_time = 24;
+  $access_token = get_option('options_instagram_access_token');
+  $feed = '';
 
-  $result = curl_exec($ch);
-  curl_close($ch);
+  if(get_transient('kinggeorge_instagram_feed') === false){
+    $url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $access_token;
+    $result = wp_remote_get($url);
 
-  return json_decode($result);
+    if($result){
+      $feed = json_decode($result['body']);
+    }
+  }
+  else{
+    $feed = get_transient('kinggeorge_instagram_feed');
+  }
+
+  return $feed;
 }
 
 function kinggeorge_get_bg_img_and_css($page_id, $img_field){

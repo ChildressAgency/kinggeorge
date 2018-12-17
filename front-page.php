@@ -57,16 +57,12 @@
       <div class="instagram-feed">
         <?php //echo do_shortcode('[instagram-feed]'); ?>
         <?php
-          $home_page = get_page_by_path('home');
-          $home_page_id = $home_page->ID;
-          $access_token = get_field('instagram_access_token', $home_page_id);
+          $feed = kinggeorge_get_instagram_feed();
 
-          $url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $access_token;
-          $result = fetch_data($url);
-
-          foreach($result->data as $post): ?>
-            <a href="<?php echo $post->link; ?>" target="_blank"><img src="<?php echo $post->images->low_resolution->url; ?>" /></a>
-        <?php endforeach; ?>
+          foreach($feed->data as $post){
+            echo '<a href="' . esc_url($post->link) . '" target="_blank"><img src="' . esc_url($post->images->low_resolution->url) . '" /></a>';
+          }
+        ?>
       </div>
     </div>
   </section>
