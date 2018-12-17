@@ -67,7 +67,7 @@
   <nav id="header-nav"<?php echo (is_front_page()) ? $home_page_nav_position : $other_page_nav_position; ?>>
     <div class="<?php if(!is_front_page()){ echo 'container-fluid'; } ?>">
       <div class="navbar-header">
-        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo">King George</a>
+        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo">Visit King George</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
