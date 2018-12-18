@@ -1,10 +1,10 @@
 <?php
 if(!defined('ABSPATH')){ exit; }
 
-$page_id = get_the_ID(); ?>
+function poi_gallery(){
+  $page_id = get_the_ID();
 
-<div class="gallery">
-  <?php
+  echo '<div class="gallery">';
     $featured_gallery_image_id = get_post_meta(get_the_ID(), 'featured_gallery_image', true);
     if($featured_gallery_image_id){
       $featured_gallery_image = wp_get_attachment_image_src($featured_gallery_image_id, 'full');
@@ -29,5 +29,5 @@ $page_id = get_the_ID(); ?>
         echo '</a>';
       }
     }
-  ?>
-</div>
+  echo '</div>';
+}
