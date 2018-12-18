@@ -27,7 +27,7 @@ class poi_trip_planner{
     add_shortcode('poi_map', array($this, 'poi_map'));
     add_shortcode('poi_full_list', array($this, 'poi_full_list'));
     add_shortcode('poi_mytrip', array($this, 'poi_mytrip'));
-
+    add_shortcode('poi_gallery', array($this, 'poi_gallery'));
 
     add_filter('template_include', array($this, 'set_poi_types_template'));
     add_filter('single_template', array($this, 'get_poi_template'));
@@ -78,11 +78,15 @@ class poi_trip_planner{
   }
 
   function poi_map(){
-    include(POI_PLUGIN_DIR . '/poi-map.php');
+    include(POI_PLUGIN_DIR . '/shortcodes/poi-map.php');
   }
 
   function poi_full_list(){
-    include(POI_PLUGIN_DIR . '/poi-full-list.php');
+    include(POI_PLUGIN_DIR . '/shortcodes/poi-full-list.php');
+  }
+
+  function poi_gallery(){
+    include(POI_PLUGIN_DIR . '/shortcodes/poi_gallery.php');
   }
 
   function set_poi_types_template($template){
@@ -114,7 +118,7 @@ class poi_trip_planner{
   }
 
   function poi_mytrip(){
-    include(POI_PLUGIN_DIR . '/poi-mytrip.php');
+    include(POI_PLUGIN_DIR . '/shortcodes/poi-mytrip.php');
   }
 
 }
