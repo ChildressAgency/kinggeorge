@@ -2,6 +2,7 @@
 if(!defined('ABSPATH')){ exit; }
 
 function poi_map(){ ?>
+  <?php ob_start(); ?>
   <section id="pois">
     <div class="container-fluid">
       <div class="row">
@@ -32,7 +33,7 @@ function poi_map(){ ?>
                     <div class="panel panel-default">
                       <div id="poi-type-heading-<?php echo $p; ?>" class="panel-heading" role="tab">
                         <h4 class="panel-title">
-                          <a href="#poi-type-<?php echo $p; ?>" class="collapsed" data-toggle="collapse" data-parent="#poi-nav" role="button"  aria-expanded="false" aria-controls="poi-type-<?php echo $p; ?>"><?php echo $poi_type->name; ?><i class="fas fa-chevron-up"></i></a>
+                          <a href="#poi-type-<?php echo $p; ?>" class="collapsed" data-toggle="collapse" data-parent="#poi-nav" role="button"  aria-expanded="false" aria-controls="poi-type-<?php echo $p; ?>"><?php echo esc_html($poi_type->name); ?><i class="fas fa-chevron-up"></i></a>
                         </h4>
                       </div>
                       <div id="poi-type-<?php echo $p; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="poi-type-heading-<?php echo $p; ?>" aria-expanded="false">
@@ -49,7 +50,7 @@ function poi_map(){ ?>
                                 }
                                 $website = get_field('website');
                               ?>
-                              <a href="#" data-poi_title="<?php echo get_the_title(); ?>" data-poi_description="<?php echo get_field('map_description'); ?>" data-poi_page="<?php echo get_permalink(); ?>" data-poi_website="<?php echo esc_url($website['url']); ?>" data-poi_lat="<?php echo $poi_lat; ?>" data-poi_lng="<?php echo $poi_lng; ?>" class="marker-link">
+                              <a href="#" data-poi_title="<?php esc_html_e(get_the_title()); ?>" data-poi_description="<?php echo wp_kses_post(get_field('map_description')); ?>" data-poi_page="<?php echo esc_url(get_permalink()); ?>" data-poi_website="<?php echo esc_url($website['url']); ?>" data-poi_lat="<?php echo $poi_lat; ?>" data-poi_lng="<?php echo $poi_lng; ?>" class="marker-link">
                                 <?php the_title(); ?>
                               </a>
                             </li>
@@ -71,4 +72,6 @@ function poi_map(){ ?>
       </div>
     </div>
   </section>
-<?php }
+<?php 
+  return ob_get_clean();
+}

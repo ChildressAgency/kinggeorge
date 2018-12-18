@@ -174,6 +174,14 @@ if(!class_exists('poi_post_type')){
           ),
           array(
             'key' => 'field_8',
+            'label' => 'Featured Gallery Image',
+            'name' => 'featured_gallery_image',
+            'type' => 'image',
+            'return_format' => 'id',
+            'preview_size' => 'full'
+          ),
+          array(
+            'key' => 'field_9',
             'label' => 'Gallery',
             'name' => 'gallery',
             'type' => 'gallery'

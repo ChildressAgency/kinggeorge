@@ -2,6 +2,7 @@
 if(!defined('ABSPATH')){ exit; }
 
 function poi_full_list(){ ?>
+<?php ob_start(); ?>
   <div class="attractions-list" role="list">
     <?php
       $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
@@ -23,14 +24,14 @@ function poi_full_list(){ ?>
 
             if($street_address || $city_state_zip){
               echo '<p>';
-                echo $street_address ? $street_address : '';
+                echo $street_address ? esc_html($street_address) : '';
                 if($street_address && $city_state_zip){ echo '<br />'; }
-                echo $city_state_zip ? $city_state_zip : '';
+                echo $city_state_zip ? esc_html($city_state_zip) : '';
               echo '</p>';
             }
 
             $phone = get_field('phone');
-            echo $phone ? '<p>' . $phone . '</p>' : '';
+            echo $phone ? '<p>' . esc_html($phone) . '</p>' : '';
 
             $website = get_field('website');
             if(!empty($website)){
@@ -38,11 +39,11 @@ function poi_full_list(){ ?>
               if($website_title == ''){
                 $website_title = $website['url'];
               }
-              echo '<p><a href="' . $website['url'] . '" target="_blank">' . $website_title . '</a></p>';
+              echo '<p><a href="' . esc_url($website['url']) . '" target="_blank">' . esc_html($website_title) . '</a></p>';
             }
 
             $map_description = get_field('map_description');
-            echo $map_description ? '<p>' . $map_description . '</p>' : '';
+            echo $map_description ? '<p>' . wp_kses_post($map_description) . '</p>' : '';
           ?>
         </div>
     <?php endwhile; endif; ?>
@@ -61,4 +62,5 @@ function poi_full_list(){ ?>
       ));
     ?>
   </div>
-<?php }
+<?php return ob_get_clean();
+}

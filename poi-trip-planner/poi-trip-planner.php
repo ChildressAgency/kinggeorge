@@ -15,7 +15,6 @@ define('POI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once POI_PLUGIN_DIR . '/classes/class-poi_post_type.php';
 require_once POI_PLUGIN_DIR . '/classes/class-poi_tag_search.php';
-require_once POI_PLUGIN_DIR . '/shortcodes/poi_gallery.php';
 require_once POI_PLUGIN_DIR . '/shortcodes/poi-map.php';
 require_once POI_PLUGIN_DIR . '/shortcodes/poi-full-list.php';
 require_once POI_PLUGIN_DIR . '/shortcodes/poi-mytrip.php';
@@ -32,8 +31,6 @@ class poi_trip_planner{
     add_shortcode('poi_map', 'poi_map');
     add_shortcode('poi_full_list', 'poi_full_list');
     add_shortcode('poi_mytrip', 'poi_mytrip');
-
-    add_shortcode('poi_gallery', 'poi_gallery');
 
     add_filter('template_include', array($this, 'set_poi_types_template'));
     add_filter('single_template', array($this, 'get_poi_template'));

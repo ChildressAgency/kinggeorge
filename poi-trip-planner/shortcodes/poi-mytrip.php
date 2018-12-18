@@ -2,6 +2,7 @@
 if(!defined('ABSPATH')){ exit; }
 
 function poi_mytrip(){
+  ob_start();
   $poi_ids = [];
 
   if(isset($_GET['poi_ids'])){
@@ -82,4 +83,5 @@ function poi_mytrip(){
       </div>
     </section>
   <?php endif;
+  return ob_get_clean();
 }
