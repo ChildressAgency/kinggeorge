@@ -13,21 +13,27 @@ if(!defined('ABSPATH')){ exit; }
 define('POI_PLUGIN_DIR', dirname(__FILE__));
 define('POI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
+require_once POI_PLUGIN_DIR . '/classes/class-poi_post_type.php';
+require_once POI_PLUGIN_DIR . '/classes/class-poi_tag_search.php';
+require_once POI_PLUGIN_DIR . '/shortcodes/poi_gallery.php';
+require_once POI_PLUGIN_DIR . '/shortcodes/poi-map.php';
+require_once POI_PLUGIN_DIR . '/shortcodes/poi-full-list.php';
+require_once POI_PLUGIN_DIR . '/shortcodes/poi-mytrip.php';
+
 class poi_trip_planner{
   public function __construct(){
     add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
     add_action('init', array($this, 'poi_load_textdomain'));
 
-    require_once POI_PLUGIN_DIR . '/classes/class-poi_post_type.php';
     $poi_post_type = new poi_post_type();
 
-    require_once POI_PLUGIN_DIR . '/classes/class-poi_tag_search.php';
     $poi_tag_search = new poi_tag_search();
 
-    add_shortcode('poi_map', array($this, 'poi_map'));
-    add_shortcode('poi_full_list', array($this, 'poi_full_list'));
-    add_shortcode('poi_mytrip', array($this, 'poi_mytrip'));
-    add_shortcode('poi_gallery', array($this, 'poi_gallery'));
+    add_shortcode('poi_map', 'poi_map');
+    add_shortcode('poi_full_list', 'poi_full_list');
+    add_shortcode('poi_mytrip', 'poi_mytrip');
+
+    add_shortcode('poi_gallery', 'poi_gallery');
 
     add_filter('template_include', array($this, 'set_poi_types_template'));
     add_filter('single_template', array($this, 'get_poi_template'));
@@ -77,18 +83,6 @@ class poi_trip_planner{
     );
   }
 
-  function poi_map(){
-    include(POI_PLUGIN_DIR . '/shortcodes/poi-map.php');
-  }
-
-  function poi_full_list(){
-    include(POI_PLUGIN_DIR . '/shortcodes/poi-full-list.php');
-  }
-
-  function poi_gallery(){
-    include(POI_PLUGIN_DIR . '/shortcodes/poi_gallery.php');
-  }
-
   function set_poi_types_template($template){
     if(is_tax('poi_types') && !$this->is_cust_template($template)){
       $template = POI_PLUGIN_DIR . '/templates/taxonomy-poi_types.php';
@@ -116,11 +110,6 @@ class poi_trip_planner{
 
     return $single_template;
   }
-
-  function poi_mytrip(){
-    include(POI_PLUGIN_DIR . '/shortcodes/poi-mytrip.php');
-  }
-
 }
 
 new poi_trip_planner;
