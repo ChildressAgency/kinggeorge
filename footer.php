@@ -194,6 +194,8 @@
               <span itemprop="streetAddress"><?php esc_html_e(get_option('options_street_address')); ?></span><br /><span itemprop="addressLocality"><?php esc_html_e(get_option('options_city')); ?></span>, <span itemprop="addressRegion"><?php esc_html_e(get_option('options_state')); ?></span> <span itemprop="postalCode"><?php esc_html_e(get_option('options_zip')); ?></span>
             </address>
             <p itemprop="telephone"><?php esc_html_e(get_option('options_phone')); ?></p>
+            <?php $county_link = get_option('options_county_link'); ?>
+            <p><a href="<?php echo esc_url($county_link['url']); ?>" target="<?php echo esc_attr($county_link['target']); ?>"><?php esc_html_e($county_link['title']); ?></a></p>
           </div>
         </div>
       </div>

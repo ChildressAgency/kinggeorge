@@ -947,6 +947,11 @@ img.alignright{
 .footer-main .contact-info address{
   margin-bottom:0;
 }
+.footer-main .contact-info p>a,
+.footer-main .contact-info p>a:hover,
+.footer-main .contact-info p>a:focus{
+  color:#fff;
+}
 .footer-main .social{
   text-align:right;
 }
