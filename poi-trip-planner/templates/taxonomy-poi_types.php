@@ -2,7 +2,7 @@
 <main id="main">
   <div class="container">
     <?php $poi_type = get_queried_object(); ?>
-    <h2 class="page-header"><?php the_field('poi_type_page_header', $poi_type); ?></h2>
+    <h2 class="page-header"><?php esc_html(get_field('poi_type_page_header', $poi_type)); ?></h2>
     <div class="row">
       <?php
         $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
@@ -37,7 +37,7 @@
               }
             }
           ?>
-          <a href="<?php the_permalink(); ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
+          <a href="<?php the_permalink(); ?>" class="quick-link" style="background-image:url(<?php echo esc_url($poi_image); ?>);">
             <div class="caption">
               <h3><?php the_title(); ?></h3>
             </div>

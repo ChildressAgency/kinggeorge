@@ -23,18 +23,51 @@
 
 <body <?php body_class(); ?>>
   <?php if(is_front_page()): ?>
-    <div class="hp-hero" style="background-image:url(<?php the_field('hero_image'); ?>); <?php the_field('hero_image_css'); ?>">
-      <div class="hp-hero-caption">
-        <h1><?php the_field('hero_title'); ?></h1>
-        <h3><?php the_field('hero_subtitle'); ?></h3>
+    <?php 
+      $front_page_id = get_the_ID();
+      $hero_slides = get_post_meta($front_page_id, 'hero_slider', true);
+      if($hero_slides == 1): ?>
+
+        <?php $hero_bg_img_and_css = kinggeorge_get_bg_img_and_css($front_page_id, 'hero_slider_0_slide_image'); ?>
+
+        <div class="hp-hero" style="background-image:url(<?php echo esc_url($hero_bg_img_and_css['image_url']); ?>); <?php echo esc_html($hero_bg_img_and_css['image_css']); ?>">
+          <div class="hp-hero-caption">
+            <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_title', true)); ?></h1>
+            <h3><?php echo esc_html(get_post_meta($front_page_id, 'hero_subtitle', true)); ?></h3>
+          </div>
+        </div>
+
+    <?php else: ?>
+
+      <div id="hero-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <?php for($i = 0; $i < $hero_slides; $i++): ?>
+            
+            <?php $slide_bg_img_and_css = kinggeorge_get_bg_img_and_css($front_page_id, 'hero_slider_' . $i . '_slide_image'); ?>
+            <div class="item<?php if($i == 0){ echo ' active'; } ?>" style="background-image:url(<?php echo esc_url($slide_bg_img_and_css['image_url']); ?>); <?php echo esc_html($slide_bg_img_and_css['image_css']); ?>">
+              <?php if(get_post_meta($front_page_id, 'hero_slider_' . $i . '_darken_image', true) == 1): ?>
+                <div class="hp-hero-overlay"></div>
+              <?php endif; ?>
+            </div>
+          <?php endfor; ?>
+        </div>
+        <div class="hp-hero-caption">
+          <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_title', true)); ?></h1>
+          <h1><?php echo esc_html(get_post_meta($front_page_id, 'hero_subtitle', true)); ?></h1>
+        </div>
       </div>
-    </div>
+
+    <?php endif; ?>
   <?php endif; ?>
 
-  <nav id="header-nav"<?php if(is_front_page()){ echo ' data-spy="affix" data-offset-top="395"'; } ?>>
-    <div class="container_fluid">
+  <?php 
+    $home_page_nav_position = ' data-spy="affix" data-offset-top="395"';
+    $other_page_nav_position = ' class="navbar-fixed-top"';
+  ?>
+  <nav id="header-nav"<?php echo (is_front_page()) ? $home_page_nav_position : $other_page_nav_position; ?>>
+    <div class="<?php if(!is_front_page()){ echo 'container-fluid'; } ?>">
       <div class="navbar-header">
-        <a href="<?php echo home_url(); ?>" class="header-logo">King George</a>
+        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo">Visit King George</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
@@ -49,7 +82,7 @@
           </div>
         </div>
         <a href="#" id="search-icon-menu" class="search-icon hidden-xs"></a>
-        <a href="<?php echo home_url('my-trip'); ?>" id="my-trip-icon" data-count="0">My Trip</a>
+        <a href="<?php echo esc_url(home_url('my-trip')); ?>" id="my-trip-icon" data-count="0">My Trip</a>
         <?php
           $header_nav_args = array(
             'theme_location' => 'header-nav',
@@ -71,20 +104,19 @@
   </nav>
 
   <?php if(!is_front_page()): ?>
-    <?php 
-      //$hero_image = get_stylesheet_directory_uri() . '/images/pond.jpg';
-      //$hero_image_css = 'background-position:center center;';
-      $hero_image = get_field('default_hero_image', 'option');
-      $hero_image_css = get_field('default_hero_image_css', 'option');
+    <?php
+      $page_id = get_the_ID(); 
 
-      if(get_field('hero_image')){
-        $hero_image = get_field('hero_image');
-        if(get_field('hero_image_css')){
-          $hero_image_css = get_field('hero_image_css');
-        }
-        else{
-          $hero_image_css = '';
-        }
+      $hero_image = get_post_meta($page_id, 'hero_image', true);
+      if($hero_image){
+        $hero_image_and_css = kinggeorge_get_bg_img_and_css($page_id, 'hero_image');
+      }
+      else{
+        $hero_image_and_css = [];
+        $hero_image_id = get_option('options_default_hero_image');
+        $hero_image = wp_get_attachment_image_src($hero_image_id, 'full');
+        $hero_image_and_css['image_url'] = $hero_image[0];
+        $hero_image_and_css['image_css'] = get_option('options_default_hero_image_css');
       }
 
       $hero_caption = '';
@@ -92,7 +124,7 @@
         $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="Spotlight" />';
       }
       elseif(is_tax('poi_types') || has_term('', 'poi_types')){
-        $queried_term = get_the_terms(get_the_ID(), 'poi_types');
+        $queried_term = get_the_terms($page_id, 'poi_types');
         //var_dump($queried_term);
         $current_term_id = $queried_term[0]->term_id;
         $current_term = get_term($current_term_id, 'poi_types');
@@ -105,22 +137,23 @@
           $term_parent = get_term($current_term->parent, 'poi_types');
           $term_name = $term_parent->name;
         }
-        $hero_caption = '<h1>' . $term_name . '</h1>';
+        $hero_caption = '<h1>' . esc_html($term_name) . '</h1>';
       }
       elseif(is_post_type_archive('tribe_events') || is_singular('tribe_events')){
         $events_page = get_page_by_path('events');
         $events_page_id = $events_page->ID;
-        $hero_caption = '<h1>' . get_field('hero_caption', 598) . '</h1>';
+        $events_hero_caption = get_post_meta(598, 'hero_caption', true);
+        $hero_caption = '<h1>' . esc_html($events_hero_caption) . '</h1>';
       }
-      elseif(get_field('hero_caption')){
-        $hero_caption = '<h1>' . get_field('hero_caption') . '</h1>';
+      elseif(get_post_meta($page_id, 'hero_caption', true)){
+        $hero_caption = '<h1>' . esc_html(get_post_meta($page_id, 'hero_caption', true)) . '</h1>';
       }
       else{
-        $hero_caption = '<h1>' . get_the_title() . '</h1>';
+        $hero_caption = '<h1>' . esc_html(get_the_title()) . '</h1>';
       }
     ?>
 
-    <div class="hero" style="background-image:url(<?php echo $hero_image; ?>); <?php echo $hero_image_css; ?>">
+    <div class="hero" style="background-image:url(<?php echo esc_url($hero_image_and_css['image_url']); ?>); <?php echo esc_html($hero_image_and_css['image_css']); ?>">
       <div class="container">
         <div class="caption">
           <?php echo $hero_caption; ?>

@@ -2,8 +2,8 @@
   <section id="quick-links">
     <div class="container">
       <header class="section-header">
-        <h2><?php the_field('featured_poi_types_title'); ?></h2>
-        <p><?php the_field('featured_poi_types_subtitle'); ?></p>
+        <h2><?php esc_html_e(get_field('featured_poi_types_title')); ?></h2>
+        <p><?php esc_html_e(get_field('featured_poi_types_subtitle')); ?></p>
       </header>
       <?php
         $featured_poi_categories = get_field('featured_poi_types'); 
@@ -23,9 +23,9 @@
                   $poi_term_object = get_term($poi_id, 'poi_types');
                   $poi_term_name = $poi_term_object->name;
                 ?>
-                <a href="<?php echo $poi_term_link; ?>" class="quick-link" style="background-image:url(<?php echo $poi_image; ?>);">
+                <a href="<?php echo $poi_term_link; ?>" class="quick-link" style="background-image:url(<?php echo esc_url($poi_image); ?>);">
                   <div class="caption">
-                    <h3><?php echo $poi_term_name; ?></h3>
+                    <h3><?php esc_html_e($poi_term_name); ?></h3>
                   </div>
                   <div class="quick-link-overlay"></div>
                 </a>
@@ -36,22 +36,35 @@
 
       <?php if(get_field('featured_poi_types_content')): ?>
         <article>
-          <?php the_field('featured_poi_types_content'); ?>
+          <?php echo wp_kses_post(get_field('featured_poi_types_content')); ?>
         </article>
       <?php endif; ?>
     </div>
   </section>
 
   <section id="instagram-feed">
-    <h2><?php the_field('instagram_feed_section_title'); ?></h2>
+        <div class="instagram-arrows">
+          <span class="instagram_next"></span>
+          <span class="instagram_prev"></span>
+        </div>
+    <h2><?php esc_html_e(get_field('instagram_feed_section_title')); ?></h2>
     <div class="container">
-      <h2 class="instagram-acct-name"><?php the_field('instagram_feed_title'); ?></h2>
-      <p><?php the_field('instagram_feed_subtitle'); ?></p>
-      <?php if(get_field('instagram', 'option')): ?>
-        <a href="<?php the_field('instagram', 'option'); ?>" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
+      <h2 class="instagram-acct-name"><?php esc_html_e(get_field('instagram_feed_title')); ?></h2>
+      <p><?php esc_html_e(get_field('instagram_feed_subtitle')); ?></p>
+      <?php 
+        $instagram = get_option('options_instagram');
+        if($instagram): ?>
+        <a href="<?php echo esc_url($instagram); ?>" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
       <?php endif; ?>
       <div class="instagram-feed">
-        <?php echo do_shortcode('[instagram-feed]'); ?>
+        <?php //echo do_shortcode('[instagram-feed]'); ?>
+        <?php
+          $feed = kinggeorge_get_instagram_feed();
+
+          foreach($feed->data as $post){
+            echo '<a href="' . esc_url($post->link) . '" target="_blank"><img src="' . esc_url($post->images->low_resolution->url) . '" /></a>';
+          }
+        ?>
       </div>
     </div>
   </section>
@@ -73,17 +86,20 @@
           <?php while($recent_posts->have_posts()): $recent_posts->the_post(); ?>
             <?php get_template_part('partials/spotlight-loop'); ?>
           <?php endwhile; ?>
-          <a href="<?php echo home_url('spotlight'); ?>" class="btn-main">View All</a>
+          <a href="<?php echo esc_url(home_url('spotlight')); ?>" class="btn-main">View All</a>
         </div>
       </section>
   <?php endif; wp_reset_postdata(); ?>
 
   <section id="home-pois">
     <header class="poi-header">
-      <?php if(get_field('poi_section_title')): ?>
-        <h2><?php the_field('poi_section_title'); ?></h2>
-      <?php endif; if(get_field('poi_section_subtitle')): ?>
-        <p><?php the_field('poi_section_subtitle'); ?></p>
+      <?php 
+        $poi_section_title = get_post_meta(get_the_ID(), 'poi_section_title', true);
+        $poi_section_subtitle = get_post_meta(get_the_ID(), 'poi_section_subtitle', true);
+        if($poi_section_title): ?>
+        <h2><?php esc_html_e($poi_section_title); ?></h2>
+      <?php endif; if($poi_section_subtitle): ?>
+        <p><?php esc_html_e($poi_section_subtitle); ?></p>
       <?php endif; ?>
     </header>
     <?php echo do_shortcode('[poi_map]'); ?>

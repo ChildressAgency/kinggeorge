@@ -15,17 +15,17 @@
 
                   if($street_address || $city_state_zip){
                     echo '<p class="poi-address">';
-                      echo $street_address ? $street_address : '';
+                      echo $street_address ? esc_html($street_address) : '';
                       if($street_address && $city_state_zip){ echo ' '; }
-                      echo $city_state_zip;
+                      echo esc_html($city_state_zip);
                     echo '</p>';
                   }
                 
                   $phone = get_field('phone');
-                  echo $phone ? '<p class="poi-phone">' . $phone . '</p>' : '';
+                  echo $phone ? '<p class="poi-phone">' . esc_html($phone) . '</p>' : '';
 
                   $email = get_field('email');
-                  echo $email ? '<p class="poi-email">' . $email . '</p>' : '';
+                  echo $email ? '<p class="poi-email">' . sanitize_email($email) . '</p>' : '';
 
                   $website = get_field('website');
                   if(!empty($website)){
@@ -34,7 +34,7 @@
                       $website_title = $website['url'];
                     }
 
-                    echo '<p class="poi-website"><a href="' . $website['url'] . '" target="_blank">' . $website_title . '</a></p>';
+                    echo '<p class="poi-website"><a href="' . esc_url($website['url']) . '" target="_blank">' . esc_html($website_title) . '</a></p>';
                   }
                 ?>
               </header>
@@ -50,22 +50,7 @@
         <?php if(get_field('gallery')): ?>
           </div>
           <div class="col-sm-5 col-sm-pull-7">
-            <div class="gallery">
-              <?php 
-                $images = get_field('gallery');
-                if(has_post_thumbnail()){
-                  $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                }
-                else{
-                  $featured_image = $images[0]['url'];
-                }
-                echo '<img src="' . $featured_image . '" class="img-responsive center-block" alt="' . get_the_title() . '" />';
-                foreach($images as $image): ?>
-                  <a href="<?php echo $image['url']; ?>" class="gallery-image" title="<?php echo $image['caption']; ?>">
-                    <img src="<?php echo $image['sizes']['thumbnail']; ?>" class="img-responsive center-block" alt="<?php echo $image['alt']; ?>" />
-                  </a>
-              <?php endforeach; ?>
-            </div>
+            <?php poi_gallery(); ?>
           </div>
         <?php endif; ?>
       </div>

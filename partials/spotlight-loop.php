@@ -6,7 +6,7 @@
           $post_image = get_the_post_thumbnail(get_the_ID(), 'thumbnail', array('class' => 'img-responsive center-block'));
         }
         else{
-          $post_image = '<img src="' . get_field('default_spotlight_image', 'option') . '" class="img-responsive center-block" alt="" />';
+          $post_image = '<img src="' . esc_url(get_option('options_default_spotlight_image')) . '" class="img-responsive center-block" alt="" />';
         }
 
         echo $post_image;
