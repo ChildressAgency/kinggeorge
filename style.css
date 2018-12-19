@@ -43,6 +43,29 @@ a{
   background-color:#f4bb3a;
 }
 
+img.alignnone{
+  display:block;
+  max-width:100%;
+  margin:25px;
+}
+img.aligncenter{
+  display:block;
+  max-width:100%;
+  margin:25px auto;
+}
+img.alignleft{
+  display:block;
+  max-width:100%;
+  float:left;
+  margin:25px 25px 25px 0px;
+}
+img.alignright{
+  display:block;
+  max-width:100%;
+  float:right;
+  margin:25px 0px 25px 25px;
+}
+
 .hp-hero{
   height:395px;
   background-repeat:no-repeat;
