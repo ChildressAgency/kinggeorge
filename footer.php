@@ -109,6 +109,8 @@
       <div class="container-fluid">
         <div class="col-sm-2">
           <img src="<?php echo get_stylesheet_directory_uri() . '/images/logo.png'; ?>" class="img-responsive center-block" alt="Logo" />
+          <img src="<?php echo esc_url(get_field('king_george_seal', 'option')); ?>" class="img-responsive center-block" alt="King George Seal" style="margin-top:20px; max-width:135px;" />
+          <img src="<?php echo esc_url(get_field('virginia_is_for_lovers_logo', 'option')); ?>" class="img-responsive center-block" style="margin-top:20px;" />
         </div>
         <div class="col-sm-6">
           <nav class="footer-nav">
