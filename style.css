@@ -327,6 +327,10 @@ img.alignright{
   color:#fff;
   text-transform:uppercase;
 }
+.hero .caption>h1>a{
+  color:#fff;
+  text-decoration:none;
+}
 .hero .hero-overlay{
   position:absolute;
   height:100%;

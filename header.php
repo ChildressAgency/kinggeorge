@@ -124,20 +124,28 @@
         $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="Spotlight" />';
       }
       elseif(is_tax('poi_types') || has_term('', 'poi_types')){
-        $queried_term = get_the_terms($page_id, 'poi_types');
-        //var_dump($queried_term);
-        $current_term_id = $queried_term[0]->term_id;
-        $current_term = get_term($current_term_id, 'poi_types');
+        if(is_archive()){
+          /*
+          $queried_term = get_the_terms($page_id, 'poi_types');
+          //var_dump(get_queried_object());
+          $current_term_id = $queried_term[0]->term_id;
+          $current_term = get_term($current_term_id, 'poi_types');
         
-        //either show the current term or parent if it has one
-        if($current_term->parent == 0){
-          $term_name = $current_term->name;
+          //either show the current term or parent if it has one
+          if($current_term->parent == 0){
+            $term_name = $current_term->name;
+          }
+          else{
+            $term_parent = get_term($current_term->parent, 'poi_types');
+            $term_name = $term_parent->name;
+          }*/
+          $term = get_queried_object();
+          $term_name = $term->name;
         }
         else{
-          $term_parent = get_term($current_term->parent, 'poi_types');
-          $term_name = $term_parent->name;
+          $term_name = get_the_term_list($page_id, 'poi_types', '', ', ');
         }
-        $hero_caption = '<h1>' . esc_html($term_name) . '</h1>';
+        $hero_caption = '<h1>' . $term_name . '</h1>';
       }
       elseif(is_post_type_archive('tribe_events') || is_singular('tribe_events')){
         $events_page = get_page_by_path('events');
