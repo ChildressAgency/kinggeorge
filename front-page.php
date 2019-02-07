@@ -54,7 +54,7 @@
       <?php 
         $instagram = get_option('options_instagram');
         if($instagram): ?>
-        <a href="<?php echo esc_url($instagram); ?>" class="instagram-link text-hide" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="<?php echo esc_url($instagram); ?>" class="instagram-link text-hide" target="_blank"><span class="sr-only"><?php echo esc_html__('King George Instagram Page', 'kinggeorge'); ?></span><i class="fab fa-instagram"></i></a>
       <?php endif; ?>
       <div class="instagram-feed">
         <?php //echo do_shortcode('[instagram-feed]'); ?>
@@ -79,14 +79,14 @@
     if($recent_posts->have_posts()): ?>
       <section id="spotlight">
         <header class="spotlight-header">
-          <h2 class="sr-only">Spotlight</h2>
+          <h2 class="sr-only"><?php echo esc_html__('Spotlight', 'kinggeorge'); ?></h2>
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/spotlight.png" alt="Spotlight" />
         </header>
         <div class="container">
           <?php while($recent_posts->have_posts()): $recent_posts->the_post(); ?>
             <?php get_template_part('partials/spotlight-loop'); ?>
           <?php endwhile; ?>
-          <a href="<?php echo esc_url(home_url('spotlight')); ?>" class="btn-main">View All</a>
+          <a href="<?php echo esc_url(home_url('spotlight')); ?>" class="btn-main"><?php echo esc_html__('View All', 'kinggeorge'); ?></a>
         </div>
       </section>
   <?php endif; wp_reset_postdata(); ?>

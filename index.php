@@ -15,7 +15,7 @@
                 }
               }
               else{
-                echo '<p>Sorry, the page you were looking for could not be found.</p>';
+                echo '<p>' . esc_html__('Sorry, the page you were looking for could not be found.', 'kinggeorge') . '</p>';
               }
             }
             else{
@@ -26,7 +26,7 @@
                 }
               }
               else{
-                echo '<p>Sorry, we could not find what you were looking for.</p>';
+                echo '<p>' . esc_html__('Sorry, we could not find what you were looking for.', 'kinggeorge') . '</p>';
               }
             }
             //wp_pagenavi();

@@ -99,8 +99,8 @@ function kinggeorge_get_menu_by_location($location){
 
 if(function_exists('acf_add_options_page')){
   acf_add_options_page(array(
-    'page_title' => __('General Settings', 'kinggeorge'),
-    'menu_title' => __('General Settings', 'kinggeorge'),
+    'page_title' => esc_html__('General Settings', 'kinggeorge'),
+    'menu_title' => esc_html__('General Settings', 'kinggeorge'),
     'menu_slug' => 'general-settings',
     'capability' => 'edit_posts',
     'redirect' => false
@@ -111,21 +111,21 @@ require_once dirname(__FILE__) . '/includes/class-wp_bootstrap_navwalker.php';
 
 function kinggeorge_header_fallback_menu(){ ?>
   <ul class="nav navbar-nav navbar-right">
-    <li <?php if(is_page('who-we-are')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('who-we-are')); ?>">Who We Are</a></li>
-    <li <?php if(has_term('activities', 'poi_types')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(get_term_link('activities', 'poi_types')); ?>">Activities</a></li>
-    <li <?php if(has_term('lodging-food', 'pois')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(get_term_link('lodging-food', 'poi_types')); ?>">Lodging & Food</a></li>
-    <li <?php if(is_home() || is_singular('post')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('spotlight')); ?>">Spotlight</a></li>
-    <li <?php if(is_page('events')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('events')); ?>">Events</a></li>
-    <li <?php if(is_page('explore-our-area')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('explore-our-area')); ?>">Map</a></li>
+    <li <?php if(is_page('who-we-are')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('who-we-are')); ?>"><?php echo esc_html__('Who We Are', 'kinggeorge'); ?></a></li>
+    <li <?php if(has_term('activities', 'poi_types')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(get_term_link('activities', 'poi_types')); ?>"><?php echo esc_html__('Activities', 'kinggeorge'); ?></a></li>
+    <li <?php if(has_term('lodging-food', 'pois')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(get_term_link('lodging-food', 'poi_types')); ?>"><?php echo esc_html__('Lodging & Food', 'kinggeorge'); ?></a></li>
+    <li <?php if(is_home() || is_singular('post')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('spotlight')); ?>"><?php echo esc_html__('Spotlight', 'kinggeorge'); ?></a></li>
+    <li <?php if(is_page('events')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('events')); ?>"><?php echo esc_html__('Events', 'kinggeorge'); ?></a></li>
+    <li <?php if(is_page('explore-our-area')){ echo 'class="active"'; } ?>><a href="<?php echo esc_url(home_url('explore-our-area')); ?>"><?php echo esc_html__('Map', 'kinggeorge'); ?></a></li>
   </ul>
 <?php }
 
 add_action('widgets_init', 'kinggeorge_widgets_init');
 function kinggeorge_widgets_init(){
   register_sidebar(array(
-    'name' => __('Spotlight Sidebar', 'kinggeorge'),
+    'name' => esc_html__('Spotlight Sidebar', 'kinggeorge'),
     'id' => 'spotlight-sidebar',
-    'description' => __('Sidebar for the Spotlight pages.', 'kinggeorge'),
+    'description' => esc_html__('Sidebar for the Spotlight pages.', 'kinggeorge'),
     'before_widget' => '<section class="sidebar-section">',
     'after_widget' => '</section>',
     'before_title' => '<h3>',
@@ -137,29 +137,29 @@ add_action('init', 'kinggeorge_change_post_object_labels');
 function kinggeorge_change_post_object_labels(){
   global $wp_post_types;
   $labels = &$wp_post_types['post']->labels;
-  $labels->name = 'Spotlight Articles';
-  $labels->singular_name = 'Spotlight Article';
-  $labels->add_new = 'Add New Spotlight Article';
-  $labels->add_new_item = 'Add New Spotlight Article';
-  $labels->edit_item = 'Edit Spotlight Article';
-  $labels->new_item = 'New Spotlight Article';
-  $labels->view_item = 'View Spotlight Article';
-  $labels->search_items = 'Search Spotlight Articles';
-  $labels->not_found = 'No Spotlight Articles found';
-  $labels->not_found_in_trash = 'No Spotlight Articles found in Trash';
-  $labels->all_items = 'All Spotlight Articles';
-  $labels->menu_name = 'Spotlight';
-  $labels->name_admin_bar = 'Spotlight';
+  $labels->name = esc_html__('Spotlight Articles', 'kinggeorge');
+  $labels->singular_name = esc_html__('Spotlight Article', 'kinggeorge');
+  $labels->add_new = esc_html__('Add New Spotlight Article', 'kinggeorge');
+  $labels->add_new_item = esc_html__('Add New Spotlight Article', 'kinggeorge');
+  $labels->edit_item = esc_html__('Edit Spotlight Article', 'kinggeorge');
+  $labels->new_item = esc_html__('New Spotlight Article', 'kinggeorge');
+  $labels->view_item = esc_html__('View Spotlight Article', 'kinggeorge');
+  $labels->search_items = esc_html__('Search Spotlight Articles', 'kinggeorge');
+  $labels->not_found = esc_html__('No Spotlight Articles found', 'kinggeorge');
+  $labels->not_found_in_trash = esc_html__('No Spotlight Articles found in Trash', 'kinggeorge');
+  $labels->all_items = esc_html__('All Spotlight Articles', 'kinggeorge');
+  $labels->menu_name = esc_html__('Spotlight', 'kinggeorge');
+  $labels->name_admin_bar = esc_html__('Spotlight', 'kinggeorge');
 }
 
 add_action('admin_menu', 'kinggeorge_change_post_labels');
 function kinggeorge_change_post_labels(){
   global $menu;
   global $submenu;
-  $menu[5][0] = 'Spotlight';
-  $submenu['edit.php'][5][0] = 'Spotlight';
-  $submenu['edit.php'][10][0] = 'New Spotlight Article';
-  $submenu['edit.php'][16][0] = 'Spotlight Tags';
+  $menu[5][0] = esc_html__('Spotlight', 'kinggeorge');
+  $submenu['edit.php'][5][0] = esc_html__('Spotlight', 'kinggeorge');
+  $submenu['edit.php'][10][0] = esc_html__('New Spotlight Article', 'kinggeorge');
+  $submenu['edit.php'][16][0] = esc_html__('Spotlight Tags', 'kinggeorge');
 }
 
 function kinggeorge_get_instagram_feed(){

@@ -13,7 +13,7 @@ get_header(); ?>
             <?php
               $history_nav_args = array(
                 'theme_location' => '_no_such_location',
-                'menu' => 'History Pages Navigation',
+                'menu' => esc_html__('History Pages Navigation', 'kinggeorge'),
                 'container' => '',
                 'container_id' => '',
                 'menu_class' => 'list-unstyled',

@@ -6,21 +6,21 @@
   </section>
 
   <section class="sidebar-section">
-    <h3>Recent Spotlights</h3>
+    <h3><?php echo esc_html__('Recent Spotlights', 'kinggeorge'); ?></h3>
     <ul>
       <?php wp_get_archives(array('type' => 'postbypost', 'limit' => 4)); ?>
     </ul>
   </section>
 
   <section class="sidebar-section">
-    <h3>Archives</h3>
+    <h3><?php echo esc_html__('Archives', 'kinggeorge'); ?></h3>
     <ul>
       <?php wp_get_archives(array('type' => 'monthly')); ?>
     </ul>
   </section>
 
   <section class="sidebar-section">
-    <h3>Categories</h3>
+    <h3><?php echo esc_html__('Categories', 'kinggeorge'); ?></h3>
     <ul>
       <?php wp_list_categories(array('style' => 'list', 'title_li' => '')); ?>
     </ul>

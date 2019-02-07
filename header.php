@@ -10,7 +10,7 @@
   <meta http-equiv="cache-control" content="public">
   <meta http-equiv="cache-control" content="private">
 
-  <title><?php echo bloginfo('name'); ?></title>
+  <title><?php echo esc_html(bloginfo('name')); ?></title>
 
   <?php wp_head(); ?>
 
@@ -67,9 +67,9 @@
   <nav id="header-nav"<?php echo (is_front_page()) ? $home_page_nav_position : $other_page_nav_position; ?>>
     <div class="<?php if(!is_front_page()){ echo 'container-fluid'; } ?>">
       <div class="navbar-header">
-        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo">Visit King George</a>
+        <a href="<?php echo esc_url(home_url()); ?>" class="header-logo"><?php echo esc_html__('Visit King George', 'kinggeorge'); ?></a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle Navigation</span>
+          <span class="sr-only"><?php echo esc_html__('Toggle Navigation', 'kinggeorge'); ?></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -81,8 +81,8 @@
             <?php get_search_form(); ?>
           </div>
         </div>
-        <a href="#" id="search-icon-menu" class="search-icon hidden-xs"></a>
-        <a href="<?php echo esc_url(home_url('my-trip')); ?>" id="my-trip-icon" data-count="0">My Trip</a>
+        <a href="#" id="search-icon-menu" class="search-icon hidden-xs" aria-label="Search"><span class="sr-only"><?php echo esc_html__('Search', 'kinggeorge'); ?></span></a>
+        <a href="<?php echo esc_url(home_url('my-trip')); ?>" id="my-trip-icon" data-count="0"><?php echo esc_html__('My Trip', 'kinggeorge'); ?></a>
         <?php
           $header_nav_args = array(
             'theme_location' => 'header-nav',
@@ -121,7 +121,7 @@
 
       $hero_caption = '';
       if(is_home() || is_singular('post')){
-        $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="Spotlight" />';
+        $hero_caption = '<img src="' . get_stylesheet_directory_uri() . '/images/spotlight-white.png' . '" class="img-responsive center-block" alt="' . esc_html__('Spotlight', 'kinggeorge') . '" />';
       }
       elseif(is_tax('poi_types') || has_term('', 'poi_types')){
         if(is_archive()){

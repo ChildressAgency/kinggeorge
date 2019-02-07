@@ -13,7 +13,7 @@
               </div>
             <?php endif; ?>
           <?php endwhile; else: ?>
-            <p>Sorry, the page you were looking for could not be found.</p>
+            <p><?php echo esc_html__('Sorry, the page you were looking for could not be found.', 'kinggeorge'); ?></p>
           <?php endif; ?>
         </article>
       </div>

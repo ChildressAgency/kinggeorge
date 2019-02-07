@@ -39,10 +39,10 @@
                 ?>
               </header>
               <div class="add-remove-trip">
-                <a href="#" class="btn-main btn-rounded add-to-trip" data-poi_id="<?php echo get_the_ID(); ?>">+ Add to Trip</a>
+                <a href="#" class="btn-main btn-rounded add-to-trip" data-poi_id="<?php echo get_the_ID(); ?>"><?php echo esc_html__('+ Add to Trip', 'poi_trip_planner'); ?></a>
               </div>
               <?php if($post->post_content != ''): ?>
-                <h3 class="article-title">Details:</h3>
+                <h3 class="article-title"><?php echo esc_html__('Details:', 'poi_trip_planner'); ?></h3>
                 <?php the_content(); ?>
               <?php endif; ?>
           <?php endwhile; endif; ?>

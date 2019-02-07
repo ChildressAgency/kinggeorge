@@ -25,11 +25,11 @@ function poi_mytrip(){
   ?>
   <section id="mytrip-share-link">
     <div class="container">
-      <h3>Share Your Trip:</h3>
+      <h3><?php echo esc_html__('Share Your Trip:', 'poi_trip_planner'); ?></h3>
       <?php if(!empty($poi_ids) && $poi_ids[0] != 0): ?>
         <input type="text" class="share-link" value="<?php echo esc_url(add_query_arg(array('poi_ids' => implode(',', $poi_ids)), home_url('my-trip'))); ?>" />
       <?php else: ?>
-        <input type="text" class="share-link" value="You haven't added any destinations." />
+        <input type="text" class="share-link" value="<?php echo esc_html__('You haven\'t added any destinations.', 'poi_trip_planner'); ?>" />
       <?php endif; ?>
     </div>
   </section>
@@ -37,13 +37,13 @@ function poi_mytrip(){
   <?php if(!empty($poi_ids) && $poi_ids[0] != 0): ?>
     <section id="mytrip-listings">
       <div class="container">
-        <a href="#mytrip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map">Open Map</a>
+        <a href="#mytrip-map" class="btn-main btn-alt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="mytrip-map"><?php echo esc_html__('Open Map', 'poi_trip_planner'); ?></a>
         <div id="mytrip-map" class="collapse">
           <div class="poi-map">
 
           </div>
         </div>
-        <h3>Listings</h3>
+        <h3><?php echo esc_html__('Listings', 'poi_trip_planner'); ?></h3>
         <div class="row">
           <?php
             $p = 0;
@@ -72,9 +72,9 @@ function poi_mytrip(){
                     <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                     <p><?php esc_html_e(get_field('street_address')); ?>, <?php esc_html_e(get_field('city_state_zip')); ?></p>
                     <div class="add-remove-trip">
-                      <a href="#" class="trip-link remove-trip remove-from-trip" data-poi_id="<?php echo get_the_ID(); ?>">Remove From Trip</a>
+                      <a href="#" class="trip-link remove-trip remove-from-trip" data-poi_id="<?php echo get_the_ID(); ?>"><?php echo esc_html__('Remove From Trip', 'poi_trip_planner'); ?></a>
                     </div>
-                    <a href="#mytrip-map" class="trip-link view-map marker-link" role="button" aria-expanded="false" aria-controls="mytrip-map" data-poi_title="<?php esc_html_e(get_the_title()); ?>" data-poi_description="<?php echo wp_kses_post(get_field('map_description')); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>">View on Map</a>
+                    <a href="#mytrip-map" class="trip-link view-map marker-link" role="button" aria-expanded="false" aria-controls="mytrip-map" data-poi_title="<?php esc_html_e(get_the_title()); ?>" data-poi_description="<?php echo wp_kses_post(get_field('map_description')); ?>" data-poi_website="<?php echo esc_url(get_permalink()); ?>" data-poi_lat="<?php echo $location['lat']; ?>" data-poi_lng="<?php echo $location['lng']; ?>"><?php echo esc_html__('View on Map', 'poi_trip_planner'); ?></a>
                   </div>
                 </div>
             <?php endwhile; endif; ?>

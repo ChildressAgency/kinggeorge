@@ -1,7 +1,7 @@
 <?php if(is_tax('poi_types') || is_singular('poi')): ?>
   <section id="map-link">
     <div class="container">
-      <a href="<?php echo esc_url(home_url('king-george-map')); ?>" class="btn-main btn-alt btn-rounded">Explore on interactive map ></a>
+      <a href="<?php echo esc_url(home_url('king-george-map')); ?>" class="btn-main btn-alt btn-rounded"><?php echo esc_html__('Explore on interactive map >', 'kinggeorge'); ?></a>
     </div>
   </section>
 <?php endif; ?>
@@ -93,7 +93,7 @@
                 $alliance_image_alt = get_post_meta($alliance_image_id, '_wp_attachment_image_alt', true); ?>
 
                 <li>
-                  <a href="<?php echo esc_url($alliance_link); ?>">
+                  <a href="<?php echo esc_url($alliance_link); ?>" aria-label="<?php echo esc_attr($alliance_image_alt); ?>">
                     <img src="<?php echo esc_url($alliance_image[0]); ?>" class="img-responsive center-block" alt="<?php echo esc_attr($alliance_image_alt); ?>" />
                   </a>
                 </li>
@@ -108,9 +108,9 @@
     <div class="footer-main">
       <div class="container-fluid">
         <div class="col-sm-2">
-          <img src="<?php echo get_stylesheet_directory_uri() . '/images/logo.png'; ?>" class="img-responsive center-block" alt="Logo" />
-          <img src="<?php echo esc_url(get_field('king_george_seal', 'option')); ?>" class="img-responsive center-block" alt="King George Seal" style="margin-top:20px; max-width:135px;" />
-          <img src="<?php echo esc_url(get_field('virginia_is_for_lovers_logo', 'option')); ?>" class="img-responsive center-block" style="margin-top:20px;" />
+          <img src="<?php echo get_stylesheet_directory_uri() . '/images/logo.png'; ?>" class="img-responsive center-block" alt="<?php echo esc_attr__('Logo', 'kinggeorge'); ?>" />
+          <img src="<?php echo esc_url(get_field('king_george_seal', 'option')); ?>" class="img-responsive center-block" alt="<?php echo esc_attr__('King George Seal', 'kinggeorge'); ?>" style="margin-top:20px; max-width:135px;" />
+          <img src="<?php echo esc_url(get_field('virginia_is_for_lovers_logo', 'option')); ?>" class="img-responsive center-block" style="margin-top:20px;" alt="<?php echo esc_attr__('Virginia Is For Lovers Logo', 'kinggeorge'); ?>" />
         </div>
         <div class="col-sm-6">
           <nav class="footer-nav">
@@ -121,14 +121,14 @@
                   $footer_nav_1_title = $footer_nav_1 ? esc_html($footer_nav_1->name) : '';
                   $footer_nav_1_args = array(
                     'theme_location' => 'footer-nav-1',
-                    'menu' => 'Footer Navigation 1',
+                    'menu' => esc_html__('Footer Navigation 1', 'kinggeorge'),
                     'container' => '',
                     'container_id' => '',
                     'menu_class' => 'list-unstyled',
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' . $footer_nav_1_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . esc_html($footer_nav_1_title) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_1_args);
@@ -140,14 +140,14 @@
                   $footer_nav_2_title = $footer_nav_2 ? esc_html($footer_nav_2->name) : '';
                   $footer_nav_2_args = array(
                     'theme_location' => 'footer-nav-2',
-                    'menu' => 'Footer Navigation 2',
+                    'menu' => esc_html__('Footer Navigation 2', 'kinggeorge'),
                     'container' => '',
                     'container_id' => '',
                     'menu_class' => 'list-unstyled',
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' . $footer_nav_2_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . esc_html($footer_nav_2_title) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_2_args);
@@ -159,14 +159,14 @@
                   $footer_nav_3_title = $footer_nav_3 ? esc_html($footer_nav_3->name) : '';
                   $footer_nav_3_args = array(
                     'theme_location' => 'footer-nav-3',
-                    'menu' => 'Footer Navigation 3',
+                    'menu' => esc_html__('Footer Navigation 3', 'kinggeorge'),
                     'container' => '',
                     'container_id' => '',
                     'menu_class' => 'list-unstyled',
                     'menu_id' => '',
                     'echo' => true,
                     'fallback_cb' => false,
-                    'items_wrap' => '<h3>' . $footer_nav_3_title . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'items_wrap' => '<h3>' . esc_html($footer_nav_3_title) . '</h3><ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth' => 1
                   );
                   wp_nav_menu($footer_nav_3_args);
@@ -204,11 +204,11 @@
     </div>
     <div class="copyright">
       <div class="container">
-        <p>&copy; <?php echo date('Y'); ?> <?php esc_html_e(get_option('options_footer_contact_title')); ?> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('privacy-policy')); ?>">Privacy Policy</a> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('list-your-business')); ?>">List your business</a><br />
+        <p>&copy; <?php echo date('Y'); ?> <?php esc_html_e(get_option('options_footer_contact_title')); ?> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('privacy-policy')); ?>"><?php echo esc_html__('Privacy Policy', 'kinggeorge'); ?></a> &nbsp;|&nbsp; <a href="<?php echo esc_url(home_url('list-your-business')); ?>"><?php echo esc_html('List your business', 'kinggeorge'); ?></a><br />
           <?php 
             $site_links = get_option('options_government_sites');
             if($site_links): ?>
-              Looking for our government websites? 
+              <?php echo esc_html__('Looking for our government websites?', 'kinggeorge'); ?>
               <?php 
                 for($s = 0; $s < $site_links; $s++):
                   $site_link = get_option('options_government_sites_' . $s . '_site_link'); ?>
