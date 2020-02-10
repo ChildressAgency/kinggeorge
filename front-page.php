@@ -21,7 +21,9 @@
                   $poi_term_link = get_term_link($poi_id, 'poi_types');
 
                   $poi_term_object = get_term($poi_id, 'poi_types');
-                  $poi_term_name = $poi_term_object->name;
+                  
+                  if($poi_term_object):
+                    $poi_term_name = $poi_term_object->name;
                 ?>
                 <a href="<?php echo $poi_term_link; ?>" class="quick-link" style="background-image:url(<?php echo esc_url($poi_image); ?>);">
                   <div class="caption">
@@ -29,6 +31,7 @@
                   </div>
                   <div class="quick-link-overlay"></div>
                 </a>
+                  <?php endif; ?>
               </div>
             <?php endforeach; ?>
           </div>
